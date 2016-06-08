@@ -8,6 +8,10 @@
 % the Scottish Music Review (which in any case has been lost by
 % the PoMS).
 %
+
+%%% EDIT to set the volume displayed near the PDF footer.
+\def\smr@volume{Volume 4 (2016)}
+
 \PassOptionsToClass{a4paper,twoside}{article}
 % The default point size option for SMR is 11.5pt (why??)
 % We'll allow other point sizes through class options.
@@ -24,14 +28,18 @@
 % That's the end of the options section
 \ProcessOptions \relax
 
+% Invoke the base class
+\LoadClass{article}
 
 % load all required packages
 \RequirePackage[
  a4paper,
+ twoside,
  total={6in, 8in},
  ignoreall = true,
 % top = 5cm,
- margin = 3.5cm]{geometry}
+ top = 3.5cm,
+ hmarginratio=1:1]{geometry}
 \RequirePackage{graphicx} 
 \RequirePackage[printwatermark]{xwatermark}
 \RequirePackage{wallpaper}
@@ -41,7 +49,10 @@
 \RequirePackage{xcolor}
 \RequirePackage[loadonly]{titlesec}
 \setlength{\headheight}{28pt}
-\RequirePackage{fancyhdr}
+\RequirePackage[twoside]{fancyhdr}
+\RequirePackage{titling}
+%\thetitle gets corrupted on a new \section, so...
+\appendiargdef{\title}{\protected@xdef\@mydoctitle{\thetitle}}
 
 % font setup WE CAN FIND NICER LOOKING ONE
 \RequirePackage{concmath}
@@ -64,7 +75,7 @@
   scale=0.3,% scale by 2.75
   xpos= 8.5cm,% shift by 1cm to the left
   ypos= -14.4cm% shift up by 1cm
-]{Volume 4 (2016)} %provide volume and year here <- EDIT HERE!!!!!!
+]{\smr@volume} %provide volume and year here <- EDIT HERE!!!!!!
 
 
 % %footer and header format
@@ -80,7 +91,7 @@
   \quad\\
   \ifdefined\smr@title\else%
     \message{LaTeX Warning: using main title for header. Change with \noexpand\smrtitle}%
-    \def\smr@title{\thetitle}\fi
+    \def\smr@title{\@mydoctitle}\fi
   \textbf{\smr@title}
 }
 \fancyhead[RO]{\raggedleft%
@@ -99,14 +110,6 @@
 %bottom graphic to appear on all pages
 \LRCornerWallPaper{1.0}{SMR_01.pdf}
 
-
-% Invoke the base class
-\LoadClass{article}
-% Can't require this class before \if@titlepage is defined
-%  (which amsart does)
-\RequirePackage{titling}
-%\thetitle gets corrupted on a new \section, so...
-\appendiargdef{\title}{\protected@xdef\@mydoctitle{\thetitle}}
 
 \titleclass{\section}[0]{straight}
 %\renewcommand{\thesubsection}{\arabic{section}}
