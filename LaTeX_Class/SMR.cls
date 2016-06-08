@@ -8,7 +8,7 @@
 % the Scottish Music Review (which in any case has been lost by
 % the PoMS).
 %
-\PassOptionsToClass{a4paper}{amsart}
+\PassOptionsToClass{a4paper,twoside}{article}
 % The default point size option for SMR is 11.5pt (why??)
 % We'll allow other point sizes through class options.
 \def\@@ptsize{11.5pt}
@@ -17,9 +17,9 @@
 \DeclareOption{12pt}{\def\@@ptsize{12pt}}
 % For each option in the article, try to load option.smr.
 % If that file doesn't exist, pass the current option to
-% amsart which is the our default base clase.
+% article which is the our default base clase.
 \DeclareOption*{\InputIfFileExists{\CurrentOption.smr}{}{%
-\PassOptionsToClass{\CurrentOption}{amsart}}}
+\PassOptionsToClass{\CurrentOption}{article}}}
 
 % That's the end of the options section
 \ProcessOptions \relax
@@ -42,7 +42,6 @@
 \RequirePackage[loadonly]{titlesec}
 \setlength{\headheight}{28pt}
 \RequirePackage{fancyhdr}
-\pagestyle{fancy}
 
 % font setup WE CAN FIND NICER LOOKING ONE
 \RequirePackage{concmath}
@@ -69,21 +68,28 @@
 
 
 % %footer and header format
-% \chead{}
-% \lfoot{}
-% \cfoot{}
+% Clear both header and footer
 \fancyhead{}\fancyfoot{}
 
-%author and institutional affiliation
+%author and institutional affiliation to use in the header
 \newcommand{\smrtitle}[1]{\def\smr@title{#1}}
 \newcommand{\smrauthor}[1]{\def\smr@author{#1}}
 \newcommand{\smraffiliation}[1]{\def\smr@affiliation{#1}}
+%Remember the documents title (\thetitle might get overwritten)
 \fancyhead[LE]{\raggedright%
   \quad\\
-  \bfseries\smr@title}
+  \ifdefined\smr@title\else%
+    \message{LaTeX Warning: using main title for header. Change with \noexpand\smrtitle}%
+    \def\smr@title{\thetitle}\fi
+  \textbf{\smr@title}
+}
 \fancyhead[RO]{\raggedleft%
-  \bfseries\smr@author\\
-  \textbf{\smr@affiliation}%
+  \ifdefined\smr@author\else%
+    \message{LaTeX Warning: No \noexpand\smrauthor. Working around. Use \noexpand\smrauthor
+             and \noexpand\smraffiliation to supress this message.}%
+    \def\smr@author{}\def\smr@affiliation{\theauthor}\fi
+  \textbf{\smr@author\\
+    \smr@affiliation}%
 }
 \fancyfoot[LE,RO]{\thepage}
 
@@ -93,8 +99,14 @@
 %bottom graphic to appear on all pages
 \LRCornerWallPaper{1.0}{SMR_01.pdf}
 
+
 % Invoke the base class
-\LoadClass{amsart}
+\LoadClass{article}
+% Can't require this class before \if@titlepage is defined
+%  (which amsart does)
+\RequirePackage{titling}
+%\thetitle gets corrupted on a new \section, so...
+\appendiargdef{\title}{\protected@xdef\@mydoctitle{\thetitle}}
 
 \titleclass{\section}[0]{straight}
 %\renewcommand{\thesubsection}{\arabic{section}}
@@ -132,11 +144,12 @@
 \thispagestyle{empty}
 \pagestyle{fancy}
 \AtBeginDocument{
-\par
-\vspace*{0.5ex plus 0.3ex minus 0.2ex}
-\begin{center}
- {\Huge\smr@title}\\[1.5ex plus 1ex minus 0.5ex]
- {\huge\smr@author, \smr@affiliation}
-\end{center}
-\vspace*{0.8ex plus 0.2ex minus 0.1ex}
 }
+% \par
+% \vspace*{0.5ex plus 0.3ex minus 0.2ex}
+% \begin{center}
+%  {\Huge\smr@title}\\[1.5ex plus 1ex minus 0.5ex]
+%  {\huge\smr@author, \smr@affiliation}
+% \end{center}
+% \vspace*{0.8ex plus 0.2ex minus 0.1ex}
+% }
