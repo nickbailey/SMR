@@ -73,7 +73,6 @@
 % \lfoot{}
 % \cfoot{}
 \fancyhead{}\fancyfoot{}
-\rfoot{\thepage}
 
 %author and institutional affiliation
 \newcommand{\smrtitle}[1]{\def\smr@title{#1}}
