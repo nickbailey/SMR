@@ -77,7 +77,13 @@
   ypos= -14.4cm% shift up by 1cm
 ]{\smr@volume} %provide volume and year here <- EDIT HERE!!!!!!
 
-
+%% Utility commands (Scottish _MUSIC_ review, right?)
+\newcommand{\accsharp}{\ensuremath{\sharp}}
+\newcommand{\accflat}{\ensuremath{\flat}}
+%\newcommand{\accdoubleflat}{\fontspec{freeserif.ttf}\symbol{"1D12B}}
+\newcommand{\accdoubleflat}{\ooalign{$\flat$\cr$\mkern4.4mu\flat$}}
+%\newcommand{\accdoublesharp}{\symbol{"1D12A}}
+\newcommand{\accdoublesharp}{\ensuremath{\times}}
 % %footer and header format
 % Clear both header and footer
 \fancyhead{}\fancyfoot{}
