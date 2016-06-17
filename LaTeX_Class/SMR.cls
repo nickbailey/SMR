@@ -49,7 +49,7 @@
 \RequirePackage{xcolor}
 \RequirePackage[loadonly]{titlesec}
 \setlength{\headheight}{28pt}
-\RequirePackage[twoside]{fancyhdr}
+\RequirePackage{fancyhdr}
 \RequirePackage{titling}
 %\thetitle gets corrupted on a new \section, so...
 \appendiargdef{\title}{\protected@xdef\@mydoctitle{\thetitle}}
