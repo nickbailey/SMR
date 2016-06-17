@@ -80,6 +80,7 @@
 %% Utility commands (Scottish _MUSIC_ review, right?)
 \newcommand{\accsharp}{\ensuremath{\sharp}}
 \newcommand{\accflat}{\ensuremath{\flat}}
+\newcommand{\accnatural}{\ensuremath{\natural}}
 %\newcommand{\accdoubleflat}{\fontspec{freeserif.ttf}\symbol{"1D12B}}
 \newcommand{\accdoubleflat}{\ooalign{$\flat$\cr$\mkern4.4mu\flat$}}
 %\newcommand{\accdoublesharp}{\symbol{"1D12A}}
