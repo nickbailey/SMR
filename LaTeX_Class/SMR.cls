@@ -50,14 +50,16 @@
 \RequirePackage[loadonly]{titlesec}
 \setlength{\headheight}{28pt}
 \RequirePackage{fancyhdr}
+
+% font setup WE CAN FIND NICER LOOKING ONE
+\RequirePackage{ccfonts}
+
 \RequirePackage{fontspec}
 \RequirePackage{lilyglyphs}
 \RequirePackage{titling}
 %\thetitle gets corrupted on a new \section, so...
 \appendiargdef{\title}{\protected@xdef\@mydoctitle{\thetitle}}
 
-% font setup WE CAN FIND NICER LOOKING ONE
-\RequirePackage{concmath}
 
 %watermarks EDIT!!!!!
 \newwatermark[%
