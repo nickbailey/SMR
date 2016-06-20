@@ -50,6 +50,8 @@
 \RequirePackage[loadonly]{titlesec}
 \setlength{\headheight}{28pt}
 \RequirePackage{fancyhdr}
+\RequirePackage{fontspec}
+\RequirePackage{lilyglyphs}
 \RequirePackage{titling}
 %\thetitle gets corrupted on a new \section, so...
 \appendiargdef{\title}{\protected@xdef\@mydoctitle{\thetitle}}
@@ -77,16 +79,6 @@
   ypos= -14.4cm% shift up by 1cm
 ]{\smr@volume} %provide volume and year here <- EDIT HERE!!!!!!
 
-%% Utility commands (Scottish _MUSIC_ review, right?)
-\newcommand{\accsharp}{\ensuremath{\sharp}}
-\newcommand{\accflat}{\ensuremath{\flat}}
-\newcommand{\accnatural}{\ensuremath{\natural}}
-%\newcommand{\accdoubleflat}{\fontspec{freeserif.ttf}\symbol{"1D12B}}
-\newcommand{\accdoubleflat}{\ooalign{$\flat$\cr$\mkern4.4mu\flat$}}
-%\newcommand{\accdoublesharp}{\symbol{"1D12A}}
-\newcommand{\accdoublesharp}{\ensuremath{\times}}
-% %footer and header format
-% Clear both header and footer
 \fancyhead{}\fancyfoot{}
 
 %author and institutional affiliation to use in the header
