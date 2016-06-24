@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Thu Jun 23 11:41:55 2016
-
-@author: keziah
-"""
 
 import sys
 
 class bibCite():
     ''' Replace citations in a .tex file with the correct \cite{} command.
+    
+        It will look for citations of the form 'Author Year', 
+        'Author1 & Author2 Year' or 'Author1 et al. Year' (where '&' may be 
+        '\&' or 'and' and 'et al.' may or may not have a full stop.)
     
         Parameters:
             
@@ -33,11 +32,7 @@ class bibCite():
         else:
             self.outFile = sysArgv[2]
 
-        # dictionary of strings to look for in the text (keys) and the bibtex
-        # IDs (values) with which to replace them
-        self.citations = {}
-
-        # fill dictionary
+        # fill dictionary of citations and citeIDs
         self.readBibFile()    
         
         # replace citations
@@ -74,6 +69,10 @@ class bibCite():
         
         f.close()
         
+        # dictionary of strings to look for in the text (keys) and the bibtex
+        # IDs (values) with which to replace them
+        self.citations = {}
+        
         idx = 0
         
         while True:
@@ -108,7 +107,7 @@ class bibCite():
                 # create correct author list to look for in the text
                 if authorCount == 1:
                     commaIdx = authorStr.find(',')
-                    author = authorStr[1:commaIdx]
+                    author = [authorStr[1:commaIdx]]
 
                 elif authorCount == 2:
                     commaIdx = authorStr.find(',')
@@ -118,12 +117,15 @@ class bibCite():
                     commaIdx = authorStr.find(',', andIdx)
                     author2 = authorStr[andIdx:commaIdx]
 
-                    author = '{} & {}'.format(author1, author2)
+                    author = ['{} \& {}'.format(author1, author2),
+                              '{} & {}'.format(author1, author2),
+                              '{} and {}'.format(author1, author2)]
                     
                 elif authorCount > 2:
                     commaIdx = authorStr.find(',',)
                     author1 = authorStr[1:commaIdx]
-                    author = '{} et al.'.format(author1)
+                    author = ['{} et al.'.format(author1), 
+                              '{} et al'.format(author1)]
                     
                 yearIdx = self.bib.find('year', idx, endIdx)
 
@@ -132,20 +134,27 @@ class bibCite():
                 
                 year = self.bib[idx0+1:idx1]
 
-                # create citation
-                citation = '{} {}'.format(author, year)
-                
-                if citation in self.citations.keys():
+                for a in author:
+                    # create citation
+                    citation = '{} {}'.format(a, year)
                     
-                    rename = ''.join([citation, 'a'])
-                    
-                    self.citations[rename] = self.citations[citation]
-                    
-                    self.citations.pop(citation)
-                    
-                    citation = ''.join([citation, 'b'])
-                    
-                self.citations[citation] = citeID
+                    # if this citation is already in the dictionary, add 'a'  
+                    # and 'b' to the citations
+                    if citation in self.citations.keys():
+                        
+                        # rename first instance
+                        rename = ''.join([citation, 'a'])
+                        
+                        self.citations[rename] = self.citations[citation]
+                        
+                        # remove old citation
+                        self.citations.pop(citation)
+                        
+                        # create new citation
+                        citation = ''.join([citation, 'b'])
+                        
+                    # add citation and ID to dictionary
+                    self.citations[citation] = citeID
 
             idx += 1
 
@@ -169,9 +178,11 @@ class bibCite():
             
                 idx = tex.find(k, idx)
                 
+                # if the citation is not found, break out of loop
                 if idx == -1:
                     break
                 
+                # replace citation with \cite{ID}
                 else: 
                     tex = ''.join([tex[:idx], cite, tex[idx+len(k):]])
                     
