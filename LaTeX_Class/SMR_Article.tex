@@ -1,5 +1,7 @@
 \documentclass{SMR}
 \usepackage{paralist}
+\usepackage{parallel}    % for side-by-side text (e.g. lyrics + translation)
+\usepackage{polyglossia} % for foreign languages (foreign to the British, that is)
 
 %graphics
 \graphicspath{ {/Where/you/keep/your/graphics} }  % <- UPDATE THE PATH
@@ -9,8 +11,8 @@
 \smrauthor{Marcin and Nick}
 \smraffiliation{Edinburgh and Glasgow Universities}
 
-\title{Scottish Music Review class file for PDFLaTeX}
-\author{Pietryszwski, Marcin \and Bailey, Nick}
+\title{Scottish Music Review class file for XeLaTeX}
+\author{Marcin Pietryszwski \and Nick Bailey}
 
 \begin{document}
 
@@ -22,13 +24,12 @@
 A class for the Scottish Music Review
 \end{abstract}
 
-\section{Section One - comment out if not needed} %section title comes here,
-                                                  %comment out if there are
-                                                  %no sections in the article 
+\section{Section One} %section title comes here,
+
+$\ldots$which you get by typing ``\cmd{section\{Section On\}}''
 The usual title, author and date commands given in the preamble
 are used to head up the paper, but there's also the smr- varients
-which get used in the headers.
-
+which get used in the headers. 
 If you don't supply them it'll still work, but you'll be warned.
 
 If you supply an smrauthor, you \emph{must} supply an affiliation.
@@ -36,38 +37,130 @@ If you supply an smrauthor, you \emph{must} supply an affiliation.
 The title is set at the top left of left-hand pages, and the
 author above the affiliation at the top right of right-hand pages.
 
-\vspace*{1.0cm}
+To make this document, before
+the \cmd{begin\{document\}} I said
+
+\begin{verbatim}
+\smrtitle{SMR.cls}
+\smrauthor{Marcin and Nick}
+\smraffiliation{Edinburgh and Glasgow Universities}
+
+\title{Scottish Music Review class file for XeLaTeX}
+\author{Pietryszwski, Marcin \and Bailey, Nick}
+\end{verbatim}
+
+\subsection{A Subsection} %subsections
+
+Subsections are numbered per section. This one was obtained by saying
+\cmd{subsection\{Subsection title\}}
+
+\subsection{Text appearance}
+Introduce emphasis like this: \cmd{emph\{Important\}}.
+\emph{Important}: emphasis is a matter of house style.
+We decide what it means.
+
+Footnotes\footnote{They break the flow and don't really
+mean anything in an on-line document; pages are for printing} are discouraged.
+Here is some text following a figure with a footnote added
+
+Only use single quotes, and type two get double ones. So
+\verb!` - `` - ''-'! gives you ` - `` - ''-'. Mutiple dashes
+give access to the different dashes use in properly-typeset documents
+(that was one dash): 80--90\% (two) of people don't understand that
+--- (three) why should they? The typesetter used to have to worry about that
+in the old days.
+
+\subsection{Figures in the text}
+
+In \LaTeX, figures ``float'' (i.e. get placed where they look right).
+It's best to use PDF files or PNG files, reserving JPEG files
+for when there are actual photos. Otherewise there will be nasty artefacts.
 
 Here is some text to be formatted followed by a figure of
 a Klein Bottle as an example of how graphics are formatted
 in this template.
-
 \begin{figure}[h]
-\caption{Klein Bottle} %EDIT CAPTION
+\caption{An included graphic. See how fuzzy it looks?}
+\label{f:graphicexample} % Not before the caption!
 \centering
 \includegraphics[width=0.5\textwidth]{klein.jpg}
 \end{figure}
 
-Here is some text following a figure with a footnote added
-to it \footnote{I am a footnote}. Here is an \emph{emphasized text}
-followed by \textbf{bold text} which can be used for
-\textbf{[Referencing]}
+To get it I said
+\begin{verbatim}
+\begin{figure}[h]
+\caption{An included graphic. See how fuzzy it looks?}
+\label{f:graphicexample} % Not before the caption!
+\centering
+\includegraphics[width=0.5\textwidth]{klein.jpg}
+\end{figure}
+\end{verbatim}
+which flagrently disregards what I said about JPEG diagrams, but there you go.
 
-\pagebreak
+In particular, \emph{do not} use any raster format for musical score.
+None of them play nice with the long horizontal lines on the staves
+(because of science). Use Lilypond, or make a PDF and use that instead.
 
-\subsection{A Subsection} %subsections
+This example illustrated the optional argument in the sqaure brackets.
+\texttt{h} means ``please think about putting the figure right here''.
+The default for figures and tables is \texttt{htbf} (here, then top of the page,
+then bottom of the page, then on a page by itself, in order of preference).
 
-Subsections are numbered per section.
+Never type something like \texttt{Figure 1} in your document.
+Always label your figures with a unique name (I used \texttt{f:graphicexample};
+the \texttt{f:} is my convention). Then refer to it in your text.
+This way, you never get mis-numbered figures.
 
-\section{A New Section}
+\begin{verbatim}
+ Look at Figure~\ref{f:graphicexample}!
+\end{verbatim}
 
-This section has its own subsection.
-
-\subsection{Another subsection}
-
-Like this one.
+Look at Figure~\ref{f:graphicexample}!
+I also used the tilde, which makes sure there won't be a line-break between
+the word and the number. You can also label sections, subsections etc
+the same way.
 
 \section{Heavy-duty usage}
+\subsection{(Possibly multilingual) Side-by-Side Translations}
+After saying \cmd{usepackage$\{$parallel$\}$} at the top of your document,
+these can be achieved as follows:
+
+\begin{verbatim}
+ \begin{parallel}
+  [<environment_options>]{<left-width>}{<right-width>}
+\ParallelLText{<left-text>}
+\ParallelRText{<right-text>}
+\ParallelPar
+\ParallelLText{<left-text>}
+...
+% The following <text> goes after the side-by-side text
+% and before any footnotes...
+\renewcommand{\ParallelAtEnd}{<text>}
+\end{parallel}
+\end{verbatim}
+
+For example:
+
+\setotherlanguage{greek}
+\newfontfamily\greekfont[Script=Greek,Ligatures=TeX]{Linux Libertine O} % Has Greek characters
+\begin{Parallel}[c]{}{} %Miss out the widths and it chooses for you; v = vertical line; p = page by page
+ \ParallelRText{This is the Showing forth of the Inquiry of Herodotus of Halicarnassos,
+ to the end that neither the deeds of men may be forgotten by lapse of time,
+ nor the works great and marvellous, which have been produced some by Hellenes and
+ some by Barbarians, may lose their renown; and especially that the causes may be
+ remembered for which these waged war with one another.%
+\footnote{Typeset using \url{https://www.ctan.org/pkg/parallel?lang=en}}}%
+ \begin{greek}\ParallelLText{Ἡροδότου Ἁλικαρνησσέος ἱστορίης ἀπόδεξις ἥδε,
+ ὡς μήτε τὰ γενόμενα ἐξ ἀνθρώπων τῷ χρόνῳ ἐξίτηλα γένηται,
+ μήτε ἔργα μεγάλα τε καὶ θωμαστά, τὰ μὲν Ἕλλησι τὰ δὲ βαρβάροισι ἀποδεχθέντα, ἀκλεᾶ γένηται,
+ τά τε ἄλλα καὶ δι᾽ ἣν αἰτίην ἐπολέμησαν ἀλλήλοισι.}\end{greek}%
+ \ParallelPar
+ \begin{greek}\ParallelLText{Περσέων μέν νυν οἱ λόγιοι Φοίνικας αἰτίους φασί γενέσθαι τῆς διαφορῆς.}\end{greek}
+ \ParallelRText{Those of the Persians who have knowledge of history declare that the Phenicians first began the quarrel.}
+ \renewcommand{\ParallelAtEnd}{With thanks to \url{http://www.sacred-texts.com/cla/hh/hh1000.htm}}
+\end{Parallel}
+
+
 \subsection{Music glyphs}
 This style requires the lilyglyphs package (spelt
 	\textit{lily}%

@@ -31,6 +31,9 @@
 % Invoke the base class
 \LoadClass{article}
 
+% font setup WE CAN FIND NICER LOOKING ONE
+\RequirePackage{concrete}
+
 % load all required packages
 \RequirePackage[
  a4paper,
@@ -44,16 +47,12 @@
 \RequirePackage[printwatermark]{xwatermark}
 \RequirePackage{wallpaper}
 \RequirePackage{ifthen}
-\RequirePackage[T1]{fontenc}
-\RequirePackage[utf8]{inputenc}
+%\RequirePackage[T1]{fontenc}
+%\RequirePackage[utf8]{inputenc}
 \RequirePackage{xcolor}
 \RequirePackage[loadonly]{titlesec}
 \setlength{\headheight}{28pt}
 \RequirePackage{fancyhdr}
-
-% font setup WE CAN FIND NICER LOOKING ONE
-\RequirePackage{ccfonts}
-
 \RequirePackage{fontspec}
 \RequirePackage{lilyglyphs}
 \RequirePackage{titling}
