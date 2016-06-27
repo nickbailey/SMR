@@ -106,6 +106,29 @@ This example illustrated the optional argument in the sqaure brackets.
 The default for figures and tables is \texttt{htbf} (here, then top of the page,
 then bottom of the page, then on a page by itself, in order of preference).
 
+The above example specifies the width of figure as half that of the text.
+Here's an example illustrating a few other attributes you can use when importing graphics:
+\begin{figure}
+ \caption{A Lorenz attractor}
+ \label{f:lorenz}
+ \centering
+ \includegraphics[scale=0.4, clip=true, trim=0.5cm 0 1cm 0]{lorenz_attractor}
+\end{figure}
+\begin{verbatim}
+ \begin{figure}
+ \caption{A Lorenz attractor}
+ \label{f:lorenz}
+ \centering
+ \includegraphics[scale=0.4, clip=true, trim=0.5cm 0 1cm 0]{lorenz_attractor}
+\end{figure}
+\end{verbatim}
+If there is too much whitespace around the figure, the \texttt{trim} command will
+crop the figure, where the four lengths given specify the amount to trim off the 
+left, bottom, right and top edges respectively. In order for this to work, you must
+also set \texttt{clip=true}. \texttt{scale} is self-explanatory and is only included
+to show more of the (many) possible attributes.
+
+
 Never type something like \texttt{Figure 1} in your document.
 Always label your figures with a unique name (I used \texttt{f:graphicexample};
 the \texttt{f:} is my convention). Then refer to it in your text.
