@@ -26,7 +26,7 @@ A class for the Scottish Music Review
 
 \section{Section One} %section title comes here,
 
-$\ldots$which you get by typing ``\cmd{section\{Section On\}}''
+$\ldots$which you get by typing ``\cmd{section\{Section One\}}''
 The usual title, author and date commands given in the preamble
 are used to head up the paper, but there's also the smr- varients
 which get used in the headers. 
@@ -59,9 +59,17 @@ Introduce emphasis like this: \cmd{emph\{Important\}}.
 \emph{Important}: emphasis is a matter of house style.
 We decide what it means.
 
-Footnotes\footnote{They break the flow and don't really
-mean anything in an on-line document; pages are for printing} are discouraged.
-Here is some text following a figure with a footnote added
+%Footnotes\footnote{They break the flow and don't really
+%mean anything in an on-line document; pages are for printing} are discouraged.
+%Here is some text following a figure with a footnote added
+
+Footnotes can be created with the \cmd{footnote\{\}} command, but we ask that
+you format them as endnotes by putting
+\begin{verbatim}
+ \usepackage{endnotes}
+ \let\footnote=\endnote
+\end{verbatim}
+in the preamble and \cmd{theendnotes} at the end of the document.
 
 Only use single quotes, and type two get double ones. So
 \verb!` - `` - ''-'! gives you ` - `` - ''-'. Mutiple dashes
@@ -106,8 +114,10 @@ This example illustrated the optional argument in the sqaure brackets.
 The default for figures and tables is \texttt{htbf} (here, then top of the page,
 then bottom of the page, then on a page by itself, in order of preference).
 
-The above example specifies the width of figure as half that of the text.
-Here's an example illustrating a few other attributes you can use when importing graphics:
+The \cmd{includegraphics[]\{\}} command takes the file name in curly brackets and
+optional attributes in the square brackets.
+The above example specifies the \texttt{width} of the figure as half that of the text.
+Here's another example illustrating a few other attributes you can use when importing graphics:
 \begin{figure}
  \caption{A Lorenz attractor}
  \label{f:lorenz}
@@ -122,11 +132,10 @@ Here's an example illustrating a few other attributes you can use when importing
  \includegraphics[scale=0.4, clip=true, trim=0.5cm 0 1cm 0]{lorenz_attractor}
 \end{figure}
 \end{verbatim}
-If there is too much whitespace around the figure, the \texttt{trim} command will
-crop the figure, where the four lengths given specify the amount to trim off the 
-left, bottom, right and top edges respectively. In order for this to work, you must
-also set \texttt{clip=true}. \texttt{scale} is self-explanatory and is only included
-to show more of the (many) possible attributes.
+If you want to crop the figure, use \texttt{trim=l b r t}, where the four lengths 
+given specify the amount to trim off the left, bottom, right and top edges respectively. 
+In order for this to work, you must also set \texttt{clip=true}. \texttt{scale} is 
+self-explanatory and is only included to show more of the (many) possible attributes.
 
 
 Never type something like \texttt{Figure 1} in your document.
