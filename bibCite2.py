@@ -52,6 +52,7 @@ class bibCite():
         # IDs (values) with which to replace them
         self.citations = {}
 
+        # find the beginning of each entry
         bibEntries = re.finditer(r'(@\w+\{)', self.bib)
         
         # indices of beginning of each entry
@@ -65,10 +66,17 @@ class bibCite():
             # ignore comments
             if s[:8] != '@comment':
 
+                # find the ID
                 citeID = s[s.index('{')+1:s.index(',')]
 
-                athr = re.search(r'(author *= *\{.+\})', s)
+                # find the year
+                yr = re.search(r'(year *= *\{.+\})', s)
                 
+                year = s[s.index('{', yr.span()[0])+1:yr.span()[1]-1]
+
+                # find the author
+                athr = re.search(r'(author *= *\{.+\})', s)
+                # if there is no author, lok for an editor
                 if athr is None:
                     athr = re.search(r'(editor *= *\{.+\})', s)
 
@@ -99,10 +107,6 @@ class bibCite():
                     author1 = authorStr[1:commaIdx]
                     author = ['{} et al.'.format(author1), 
                               '{} et al'.format(author1)]
-
-                yr = re.search(r'(year *= *\{.+\})', s)
-                
-                year = s[s.index('{', yr.span()[0])+1:yr.span()[1]-1]
 
                 for a in author:
                     # create citation
@@ -143,6 +147,8 @@ class bibCite():
             
             indices = list(r.span() for r in replace)
             
+            # go backwards through indices list, as altering the tex file will
+            # change positions of characters later in the file
             for i in reversed(indices):
                 # replace citation with \cite{ID}
                 tex = ''.join([tex[:i[0]], cite, tex[i[1]:]])
