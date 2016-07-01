@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Jun 28 14:44:03 2016
-
-@author: keziah
-"""
 
 import sys
 import re
@@ -161,11 +156,5 @@ class bibCite():
 
 
 if __name__ == '__main__':
-
-    if len(sys.argv) == 1:
         
-        bibCite(['', 'text2bib_output.bib', 'smr_paper.tex', 'out.tex'])
-        
-    elif len(sys.argv) >= 3:
-        
-        bibCite(sys.argv)
+    bibCite(sys.argv)
