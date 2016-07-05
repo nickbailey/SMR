@@ -10,6 +10,9 @@ class bibCite():
         It will look for citations of the form 'Author Year', 
         'Author1 & Author2 Year' or 'Author1 et al. Year' (where '&' may be 
         '\&' or 'and' and 'et al.' may or may not have a full stop.)
+        
+        The authors in the bibtex file should be listed in the form 'Surname,
+        Forename'.
     
         Parameters:
             
@@ -58,6 +61,8 @@ class bibCite():
         # indices of beginning of each entry
         indices = list(b.span()[0] for b in bibEntries)
         
+        indices.append(len(self.bib))
+                
         for i in range(len(indices)-1):
             
             # create string for each entry
@@ -162,5 +167,5 @@ class bibCite():
 
 
 if __name__ == '__main__':
-        
+
     bibCite(sys.argv)

@@ -10,6 +10,9 @@ class bibCite():
         'Author1 & Author2 Year' or 'Author1 et al. Year' (where '&' may be 
         '\&' or 'and' and 'et al.' may or may not have a full stop.)
     
+        The authors in the bibtex file should be listed in the form 'Surname,
+        Forename'.
+        
         Parameters:
             
             bibFile: .bib file
