@@ -2,6 +2,18 @@
 \usepackage{paralist}
 \usepackage{parallel}    % for side-by-side text (e.g. lyrics + translation)
 \usepackage{polyglossia} % for foreign languages (foreign to the British, that is)
+\usepackage{filecontents} % to illustrate citations
+
+\begin{filecontents}{smr.bib}
+ @book{1965smith_numerical_solution,
+	title={Numerical Solution of Partial Differential Equations},
+	author={Smith, G D},
+	year={1965},
+	publisher={Oxford University Press},
+	location={London/New York},
+}
+\end{filecontents}
+
 
 %graphics
 \graphicspath{ {/Where/you/keep/your/graphics} }  % <- UPDATE THE PATH
@@ -119,6 +131,42 @@ Look at Figure~\ref{f:graphicexample}!
 I also used the tilde, which makes sure there won't be a line-break between
 the word and the number. You can also label sections, subsections etc
 the same way.
+
+\subsection{Citations}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+Everybody either uses \BibTeX\ citations or can export them, so we shall not
+describe that process here. To obtain the canonical form of a reference in
+\BibTeX\ format, one might look it up on Google~Scholar which permits the \BibTeX
+form to be copied to your computer's clipboard.
+
+The SMR class defines the typesetting of the citations and the bibliography
+using the \texttt{natbib} package, so if the \texttt{.bib} file contains
+
+\begin{verbatim}
+@book{1965smith_numerical_solution,
+	title={Numerical Solution of Partial Differential Equations},
+	author={Smith, G D},
+	year={1965},
+	publisher={Oxford University Press},
+	location={London/New York},
+}
+\end{verbatim}
+
+the correct form of citation can be obtained using \cmd{citep}
+(parenthetised citation) like this:
+
+\begin{verbatim}
+PDEs can be fun~\citep{1965smith_numerical_solution}.
+\end{verbatim}
+
+PDEs can be fun~\citep{1965smith_numerical_solution}.
+
+and saying \cmd{bibliography$\{$your\_bib\_file$\}$} at the place where
+the bibliography should appear.
+
+\bibliography{smr.bib}
 
 \section{Heavy-duty usage}
 \subsection{(Possibly multilingual) Side-by-Side Translations}
@@ -242,11 +290,5 @@ crib sheet follows.
 
 
 
-%a separate section for bibliography
-You will find the bibliography on the next page.
-\vfill\pagebreak
-
-
-\section*{Bibliography}
 
 \end{document}
