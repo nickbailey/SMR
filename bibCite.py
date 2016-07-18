@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import sys
+import re
 
 class bibCite():
     ''' Replace citations in a .tex file with the correct \cite{} command.
@@ -9,6 +10,9 @@ class bibCite():
         It will look for citations of the form 'Author Year', 
         'Author1 & Author2 Year' or 'Author1 et al. Year' (where '&' may be 
         '\&' or 'and' and 'et al.' may or may not have a full stop.)
+        
+        The authors in the bibtex file should be listed in the form 'Surname,
+        Forename'.
     
         Parameters:
             
@@ -33,32 +37,10 @@ class bibCite():
             self.outFile = sysArgv[2]
 
         # fill dictionary of citations and citeIDs
-        self.readBibFile()    
-        
+        self.readBibFile()
+
         # replace citations
         self.replaceCitations()
-
-
-    def _lookForClosedBrackets(self, nCurrent):
-        
-        m = nCurrent
-        
-        # ignore '}' where there have been other '{'s
-        # start at -1 as it will find the initial '{'
-        ignore = -1
-
-        while True:
-            
-            if self.bib[m] == '{':
-                ignore += 1
-                
-            if self.bib[m] == '}' and ignore != 0:
-                ignore -= 1
-                
-            elif self.bib[m] == '}' and ignore == 0:
-                return m
-
-            m += 1
             
 
     def readBibFile(self):
@@ -72,34 +54,38 @@ class bibCite():
         # dictionary of strings to look for in the text (keys) and the bibtex
         # IDs (values) with which to replace them
         self.citations = {}
-        
-        idx = 0
-        
-        while True:
-            
-            idx = self.bib.find('@', idx)
-            if idx == -1:
-                break
-            
-            if self.bib[idx+1:idx+8] != 'comment':
-                # index of end of entry
-                endIdx = self._lookForClosedBrackets(idx)
 
-                # find citation ID
-                idx0 = self.bib.find('{', idx) + 1
-                idx1 = self.bib.find(',', idx0)
-                citeID = self.bib[idx0:idx1]
+        # find the beginning of each entry
+        bibEntries = re.finditer(r'(@\w+\{)', self.bib)
+        
+        # indices of beginning of each entry
+        indices = list(b.span()[0] for b in bibEntries)
+        
+        indices.append(len(self.bib))
+                
+        for i in range(len(indices)-1):
+            
+            # create string for each entry
+            s = self.bib[indices[i]:indices[i+1]]
 
-                authorIdx = self.bib.find('author', idx, endIdx)
+            # ignore comments
+            if s[:8] != '@comment':
+
+                # find the ID
+                citeID = s[s.index('{')+1:s.index(',')]
+
+                # find the year
+                yr = re.search(r'(year *= *\{.+\})', s)
                 
-                # if there is no author field, look for editor
-                if authorIdx == -1:
-                    authorIdx = self.bib.find('editor', idx, endIdx)
-                
-                idx0 = self.bib.find('{', authorIdx)
-                idx1 = self._lookForClosedBrackets(idx0)
-                
-                authorStr = self.bib[idx0:idx1]
+                year = s[s.index('{', yr.span()[0])+1:yr.span()[1]-1]
+
+                # find the author
+                athr = re.search(r'(author *= *\{.+\})', s)
+                # if there is no author, lok for an editor
+                if athr is None:
+                    athr = re.search(r'(editor *= *\{.+\})', s)
+
+                authorStr = s[s.index('{', athr.span()[0]):athr.span()[1]-1]
 
                 # find the number of authors
                 authorCount = authorStr.split().count('and') + 1
@@ -126,13 +112,6 @@ class bibCite():
                     author1 = authorStr[1:commaIdx]
                     author = ['{} et al.'.format(author1), 
                               '{} et al'.format(author1)]
-                    
-                yearIdx = self.bib.find('year', idx, endIdx)
-
-                idx0 = self.bib.find('{', yearIdx)
-                idx1 = self._lookForClosedBrackets(idx0)
-                
-                year = self.bib[idx0+1:idx1]
 
                 for a in author:
                     # create citation
@@ -156,9 +135,7 @@ class bibCite():
                     # add citation and ID to dictionary
                     self.citations[citation] = citeID
 
-            idx += 1
 
-            
     def replaceCitations(self):
         
         f = open(self.texFile, 'r')
@@ -168,25 +145,18 @@ class bibCite():
         f.close()
         
         for k in self.citations.keys():
-            
-            idx = 0
-            
             # replacement string
             cite = '\cite{{{}}}'.format(self.citations[k])
             
-            while True:
+            replace = re.finditer(k, tex)
             
-                idx = tex.find(k, idx)
-                
-                # if the citation is not found, break out of loop
-                if idx == -1:
-                    break
-                
+            indices = list(r.span() for r in replace)
+            
+            # go backwards through indices list, as altering the tex file will
+            # change positions of characters later in the file
+            for i in reversed(indices):
                 # replace citation with \cite{ID}
-                else: 
-                    tex = ''.join([tex[:idx], cite, tex[idx+len(k):]])
-                    
-                idx += 1
+                tex = ''.join([tex[:i[0]], cite, tex[i[1]:]])
                 
         # write new .tex file
         f = open(self.outFile, 'w')
