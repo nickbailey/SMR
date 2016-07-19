@@ -1,7 +1,7 @@
 \documentclass{SMR}
 \usepackage{paralist}
-\usepackage{parallel}    % for side-by-side text (e.g. lyrics + translation)
-\usepackage{polyglossia} % for foreign languages (foreign to the British, that is)
+\usepackage{parallel}     % for side-by-side text (e.g. lyrics + translation)
+\usepackage{polyglossia}  % for foreign languages (foreign to the British, that is)
 \usepackage{filecontents} % to illustrate citations
 
 \begin{filecontents}{smr.bib}
@@ -209,6 +209,202 @@ use \cmd{cite}, for example:
 \bibliography{smr.bib}
 
 \section{Heavy-duty usage}
+
+\subsection{Direct inclusion of musical scores with LilypondBook}
+
+Direct input of music fragments is possible with the use of the
+lilypond book pre-processor. Conenventionally, the \LaTeXe file
+containing the lilypond snippets is saved with the file extension
+\texttt{.lytex}. Running lilypond-book and directing its output
+to be written into a subdirectory results in the generation of a
+\texttt{.tex} file there which may be then be processed in the
+normal way.
+
+Simple in-line fragments might be interoduced with the
+\cmd{lilypond} command:
+\begin{verbatim}
+\lilypond[fragment,relative=1,staffsize=16]{
+  \key f\major
+  \autoBeamOff
+  \partial 8 c8
+  f8. f16 f8 a
+  g8. f16 g8  r16 a
+  f16 f8. a8 c
+  d4.
+}
+\end{verbatim}
+which produces \raisebox{-3mm}{\lilypond[fragment,relative=1,staffsize=16]{
+  \key f\major
+  \autoBeamOff
+  \partial 8 c8
+  f8. f16 f8 a
+  g8. f16 g8  r16 a
+  f16 f8. a8 c
+  d4.
+}
+} and Lilypond experts will find it possible to engrave a huge range of
+different notations, such as the following piece of baroque lute
+tablature due to Johann Michael Kühnel (ca.1665-after 1730), taken
+from the \href{http://lsr.di.unimi.it/LSR/Item?id=920}{Lilypond Snippet Repository}.
+
+Because running \texttt{lilypond-book} produces very many small files,
+we choose to use a directory \texttt{Article} to contain the intermediate
+results and issue the following commands:
+
+\begin{verbatim}
+$ lilypond-book --pdf --output=Article SMR_Article.lytex
+$ ( cd Article/ ; xelatex SMR_Article.tex )
+\end{verbatim}
+
+The PDF file will appear in the Article directory along with all the \LaTeXe
+and \texttt{lilypond} intermediate files.
+
+\begin{centering}
+\begin{lilypond}[line-width=150\mm,staffsize=16]
+ \parallelMusic #'(rhythm high medium low) {
+  \time 3/4
+  \key g\major
+  % mes.0
+    \partial 4. g8 s4 		|
+    \partial 4. d'8 e' fis'	|
+    \partial 4. r4.		|
+    \partial 4. r4.		|  
+  % mes.1
+    \set Timing.measureLength = #(ly:make-moment 3/4) g8 s s2		|
+    \set Timing.measureLength = #(ly:make-moment 3/4) r8 g' d' g' c' g'	|
+    \set Timing.measureLength = #(ly:make-moment 3/4) s2.		|
+    \set Timing.measureLength = #(ly:make-moment 3/4) g,2.		|
+  % mes.2
+    g4 g8 s4.		|
+    b4 g8 b4 b8		|
+    R2.			|
+    g,2 fis,4		|
+  % mes.3
+    g8 s s2		|
+    r8 g c' d' c' b	|
+    R2.			|
+    e,2.		|
+  % mes.4
+    g8 s s2		|
+    r8 a fis a4 a8	|
+    R2.			|
+    fis,2 e,4		|
+  % mes.5
+    g8 s s2 		|
+    r8 fis b c' b a	|
+    R2.			|
+    d,2. 		|
+  % mes.6
+    g8 s s2		|
+    r8 g e g4 g8	|
+    R2.			|
+    e,2 d,4 		|
+  % mes.7
+    g8 s s2		|
+    r8 e a b a g	|
+    R2.			|
+    c,2. 		|
+  % mes.8
+    g8 s s2 		|
+    r8 fis d4. g8	|
+    r4. c8 b,4 		|
+    d,4. s8 s4 		|
+  % mes.9
+    g8 s g4. g16 s	|
+    r8 a a4. g16 a 	|
+    c4 d2		|
+    R2.			|
+  % mes.10
+    g8 s s2		|
+    g4. r		|
+    R2.			|
+    s8 g, fis,2		|
+}
+\score {
+  <<
+    \new RhythmicStaff = "Rhythm" { \rhythm }
+    \new TabStaff = "High"
+    \with {
+      instrumentName = \markup { \fontsize #18 c }
+      stringTunings = \stringTuning <a, d f a d' f'>
+      fretLabels = \markuplist { 
+        \column {  \vspace #.15 "a" }
+        "b"
+        \column {  \vspace #.15 "r" }
+        "d" % optional \rotate #90 "d" 
+        \column {  \vspace #.15 "e" }
+        "f" 
+        "g" 
+        "h" 
+        "i"
+        "k"
+      }
+      \override TabNoteHead.extra-offset = #'(0 . .15) 
+      \override VerticalAxisGroup.staff-staff-spacing = #'((padding . .5)) 
+      \override TimeSignature.style = #'single-digit
+      \override TimeSignature.X-offset = #-2
+      \override TimeSignature.font-size = #3
+      \revert TimeSignature.stencil
+    }   
+    << 
+      \once\override Score.RehearsalMark.direction = #DOWN
+      \once\override Score.RehearsalMark.self-alignment-X = #LEFT
+      \once\override Score.RehearsalMark.break-align-symbols = #'(clef)
+      \mark\markup "ouranta."
+      \high \\ \medium 
+    >>
+    \new TabStaff = "Low"
+    \with {
+      \bar ""
+      \remove "Staff_symbol_engraver"
+      \override VerticalAxisGroup.staff-staff-spacing = #'(
+                            (basic-distance . 2)
+                            (padding . 2)) 
+      stringTunings = \stringTuning <c,>
+      fretLabels = \markuplist { 
+        "4" \null 
+        "///a" \null 
+        "//a" \null
+        "/a" 
+%% With newer verions (tested wth 2.19.35) simple "a" is sufficient:
+         \column { \vspace #.15 "a" }
+      }
+    }
+    \low
+  >>
+  \layout {
+    indent = 15
+    \context {
+      \RhythmicStaff
+      \remove "Staff_symbol_engraver"
+      \omit Clef                   	   
+      \omit TimeSignature            
+      \omit NoteHead
+      \override Stem.length = #6
+      fontSize = #-1
+      \override VerticalAxisGroup #'staff-staff-spacing =
+        #'((basic-distance . 4)
+           (minimum-distance . 3)
+           (padding . 1))
+      \stemUp 
+      \autoBeamOff 
+      \override Flag.stencil = #old-straight-flag
+      \override Stem.thickness = #1.0
+      \override Dots.extra-offset = #'(0.5 . 1)
+      \override Stem.extra-offset = #'(0.5 . 0)
+      \override Flag.extra-offset = #'(0.5 . 0)
+    }
+    \context {
+      \TabStaff
+      \omit Clef
+      tablatureFormat = #fret-letter-tablature-format
+    }
+  }
+}
+\end{lilypond}
+\end{centering}
+\medskip
+
 \subsection{(Possibly multilingual) Side-by-Side Translations}
 After saying \cmd{usepackage$\{$parallel$\}$} at the top of your document,
 these can be achieved as follows:
