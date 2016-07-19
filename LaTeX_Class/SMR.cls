@@ -28,6 +28,7 @@
 % That's the end of the options section
 \ProcessOptions \relax
 
+
 % Invoke the base class
 \LoadClass{article}
 
@@ -56,8 +57,15 @@
 \RequirePackage{fontspec}
 \RequirePackage{lilyglyphs}
 \RequirePackage{titling}
+%
+% Bibliography and citation styles
+\RequirePackage[round]{natbib}
+\bibliographystyle{humannat}
+\setcitestyle{authoryear,start={(},end={)}}
+
 %\thetitle gets corrupted on a new \section, so...
 \appendiargdef{\title}{\protected@xdef\@mydoctitle{\thetitle}}
+
 
 
 %watermarks EDIT!!!!!
