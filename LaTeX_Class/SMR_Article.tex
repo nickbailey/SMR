@@ -171,8 +171,8 @@ the same way.
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 Everybody either uses \BibTeX\ citations or can export them, so we shall not
 describe that process here. To obtain the canonical form of a reference in
-\BibTeX\ format, one might look it up on Google~Scholar which permits the \BibTeX
-form to be copied to your computer's clipboard.
+\BibTeX\ format, one might look it up on Google~Scholar which permits the \BibTeX 
+\ form to be copied to your computer's clipboard.
 
 The SMR class defines the typesetting of the citations and the bibliography
 using the \texttt{natbib} package, so if the \texttt{.bib} file contains
@@ -187,8 +187,8 @@ using the \texttt{natbib} package, so if the \texttt{.bib} file contains
 }
 \end{verbatim}
 
-the correct form of citation can be obtained using \cmd{citep}
-(parenthetised citation) like this:
+the preferred form of citation can be obtained using \cmd{citep}
+(parenthesised citation) like this:
 
 \begin{verbatim}
 PDEs can be fun~\citep{1965smith_numerical_solution}.
@@ -196,8 +196,15 @@ PDEs can be fun~\citep{1965smith_numerical_solution}.
 
 PDEs can be fun~\citep{1965smith_numerical_solution}.
 
-and saying \cmd{bibliography$\{$your\_bib\_file$\}$} at the place where
+and saying \cmd{bibliography\{your\_bib\_file\}} at the place where
 the bibliography should appear.
+
+If you want the author name to be printed and not parenthesised, 
+like ``\cite{1965smith_numerical_solution} liked PDEs''
+use \cmd{cite}, for example:
+\begin{verbatim}
+\cite{1965smith_numerical_solution} liked PDEs.
+\end{verbatim}
 
 \bibliography{smr.bib}
 

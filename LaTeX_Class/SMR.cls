@@ -62,6 +62,7 @@
 \RequirePackage[round]{natbib}
 \bibliographystyle{humannat}
 \setcitestyle{authoryear,start={(},end={)}}
+\renewcommand{\refname}{Bibliography}
 
 %\thetitle gets corrupted on a new \section, so...
 \appendiargdef{\title}{\protected@xdef\@mydoctitle{\thetitle}}
