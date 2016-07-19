@@ -206,7 +206,7 @@ use \cmd{cite}, for example:
 \cite{1965smith_numerical_solution} liked PDEs.
 \end{verbatim}
 
-\bibliography{smr.bib}
+\bibliography{smr}
 
 \section{Heavy-duty usage}
 
@@ -254,10 +254,13 @@ results and issue the following commands:
 \begin{verbatim}
 $ lilypond-book --pdf --output=Article SMR_Article.lytex
 $ ( cd Article/ ; xelatex SMR_Article.tex )
+$ ( cd Article/ ; bibtex SMR_Article )
+$ ( cd Article/ ; xelatex SMR_Article.tex )
+$ ( cd Article/ ; xelatex SMR_Article.tex )
 \end{verbatim}
 
-The PDF file will appear in the Article directory along with all the \LaTeXe
-and \texttt{lilypond} intermediate files.
+The PDF file will appear in the Article directory along with all the
+\LaTeX\ and \texttt{lilypond} intermediate files.
 
 \begin{centering}
 \begin{lilypond}[line-width=150\mm,staffsize=16]
