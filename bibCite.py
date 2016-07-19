@@ -146,7 +146,7 @@ class bibCite():
         
         for k in self.citations.keys():
             # replacement string
-            cite = '\cite{{{}}}'.format(self.citations[k])
+            cite = '\citep{{{}}}'.format(self.citations[k])
             
             replace = re.finditer(k, tex)
             
