@@ -2,6 +2,18 @@
 \usepackage{paralist}
 \usepackage{parallel}    % for side-by-side text (e.g. lyrics + translation)
 \usepackage{polyglossia} % for foreign languages (foreign to the British, that is)
+\usepackage{filecontents} % to illustrate citations
+
+\begin{filecontents}{smr.bib}
+	@book{1965smith_numerical_solution,
+		title={Numerical Solution of Partial Differential Equations},
+		author={Smith, G D},
+		year={1965},
+		publisher={Oxford University Press},
+		location={London/New York},
+	}
+\end{filecontents}
+
 
 %graphics
 \graphicspath{ {/Where/you/keep/your/graphics} }  % <- UPDATE THE PATH
@@ -13,6 +25,7 @@
 
 \title{Scottish Music Review class file for XeLaTeX}
 \author{Marcin Pietryszwski \and Nick Bailey}
+
 
 \begin{document}
 
@@ -272,13 +285,5 @@ crib sheet follows.
 \caption{Get-you-started-quick crib sheet for music glyphs in the body text}
 \end{table*}
 
-
-
-%a separate section for bibliography
-You will find the bibliography on the next page.
-\vfill\pagebreak
-
-
-\section*{Bibliography}
 
 \end{document}
