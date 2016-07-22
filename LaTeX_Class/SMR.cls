@@ -61,7 +61,7 @@
 % Bibliography and citation styles
 \RequirePackage[round]{natbib}
 \bibliographystyle{humannat}
-\bibpunct[:]{(}{)}{,}{a}{}{;}
+\bibpunct[:]{(}{)}{;}{a}{}{,}
 \renewcommand{\refname}{Bibliography}
 
 %\thetitle gets corrupted on a new \section, so...
