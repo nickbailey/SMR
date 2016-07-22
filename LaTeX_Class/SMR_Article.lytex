@@ -206,6 +206,19 @@ use \cmd{cite}, for example:
 \cite{1965smith_numerical_solution} liked PDEs.
 \end{verbatim}
 
+You can put text before and after the main citation inside the
+brackets: this is use for adding page references following the year:
+\begin{verbatim}
+PDEs can be fun~\citep[Some chap called ][at the end]{1965smith_numerical_solution}.
+\end{verbatim}
+
+PDEs can be fun~\citep[Some chap called][at the end]{1965smith_numerical_solution}.
+
+If you use a \LaTeX-aware editor (Kile, Texstudio etc) it's very likely you can
+configure it to do all the above at a single click of the mouse,
+but there are too many such applications to consider them all here.
+
+
 \bibliography{smr}
 
 \section{Heavy-duty usage}
