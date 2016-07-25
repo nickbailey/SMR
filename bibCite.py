@@ -5,7 +5,7 @@ import sys
 import re
 
 class bibCite():
-    ''' Replace citations in a .tex file with the correct \cite{} command.
+    ''' Replace citations in a .tex file with the \citep{} command for natbib.
     
         It will look for citations of the form 'Author Year', 
         'Author1 & Author2 Year' or 'Author1 et al. Year' (where '&' may be 
