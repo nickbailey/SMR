@@ -1,6 +1,7 @@
 \documentclass{SMR}
 \usepackage{paralist}
 \usepackage{parallel}     % for side-by-side text (e.g. lyrics + translation)
+\usepackage{subcaption}   % for subfigures (including multipage ones)
 \usepackage{polyglossia}  % for foreign languages (foreign to the British, that is)
 \usepackage{filecontents} % to illustrate citations
 
@@ -65,7 +66,7 @@ the \cmd{begin\{document\}} I said
 \subsection{A Subsection} %subsections
 
 Subsections are numbered per section. This one was obtained by saying
-\cmd{subsection\{Subsection title\}}
+\cmd{subsection\{Subsection title\}}. \cmd{subsubsection} is also defined.
 
 \subsection{Text appearance}
 Introduce emphasis like this: \cmd{emph\{Important\}}.
@@ -164,6 +165,102 @@ Look at Figure~\ref{f:graphicexample}!
 I also used the tilde, which makes sure there won't be a line-break between
 the word and the number. You can also label sections, subsections etc
 the same way.
+
+\subsubsection{A note on subfigures}
+
+Subfigures are occasionally useful for collating a few small images
+or diagrams into a single figure, so long as they are very closely
+related. Otherwise separate figures are preferred, as they can be
+distributed more equitably and therefore typeset more beautifully.
+
+To typeset subfigures, say \cmd{usepackage\{subcaption\}} in the
+document preamble. This packaged replaces older pacakges with similar
+names which are now deprecated.
+
+\begin{figure}
+    \begin{center}
+    \begin{subfigure}[t]{0.45\textwidth}
+        \subcaption{Some German}
+        \label{subfig:de}
+        \hrulefill\\
+{\raggedright\small
+    Das Wandern ist des Müllers Lust,\\
+    das Wandern.\\
+    Das muß ein schlechter Müller sein,\\
+    dem niemals fiel das Wandern ein,\\
+    das Wandern.}
+    \end{subfigure}
+%
+    \begin{subfigure}[t]{0.45\textwidth}
+        \subcaption{Some French}
+        \label{subfig:fr}
+        \hrulefill\\
+{\small
+    Remarquez bien que les nez ont été faits pour porter des lunettes,
+    aussi avons-nous des lunettes.
+}
+    \end{subfigure}
+    
+\vspace{2\baselineskip}
+
+    \begin{subfigure}{0.45\textwidth}
+{\small\raggedright
+    Hwæt! Wé Gárdena\quad in géardagum\\
+    þéodcyninga\quad þrym gefrúnon·\\
+}
+        \hrulefill
+        \subcaption{Some English}
+        \label{subfig:en}
+    \end{subfigure}
+    \end{center}
+    \caption{This figure has three subfigures!}
+    \label{fig:subfigs}
+\end{figure}
+
+Figure~\ref{fig:subfigs} was generated like this:
+
+\begin{verbatim}
+\begin{figure}
+    \begin{center}
+    \begin{subfigure}[t]{0.45\textwidth}
+        \subcaption{Some German}
+        \label{subfig:de}
+...content
+    \end{subfigure}
+%
+    \begin{subfigure}[t]{0.45\textwidth}
+        \subcaption{Some French}
+        \label{subfig:fr}
+... content
+    \end{subfigure}
+    
+\vspace{2\baselineskip}
+
+    \begin{subfigure}{0.45\textwidth}
+... content
+        \subcaption{Some English}
+        \label{subfig:en}
+    \end{subfigure}
+    \end{center}
+    \caption{This figure has three subfigures!}
+    \label{fig:subfigs}
+\end{figure}
+\end{verbatim}
+
+The optional argument in the \cmd{begin\{subfigure\}} command
+indicates that subfigures on that line should be top-aligned.
+Note the use of the \texttt{\%} (comment) character to surpress
+a new line between the first two subfigures, and the new paragraph
+(preceding the third subfigure) with some additional space.
+
+In the SMR, it may be desirable to split a figure with its subfigures
+across many pages, for example in the case of several related but
+substantial musical extracts. This is achieved by making several different
+figures and starting each one with \cmd{ContinuedFloat} before the first
+\texttt{subfigure}.
+
+Referencing subfigures works as expected, so in the above example,
+\verb|Figure~\ref{subfig:en}| yields ``Figure~\ref{subfig:en}''
 
 \subsection{Citations}
 

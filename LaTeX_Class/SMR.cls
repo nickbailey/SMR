@@ -153,6 +153,23 @@
   {}
 \titlespacing*{name=\subsection,numberless}{0pt}{*0.8}{*0.4}
 
+\titleclass{\subsubsection}{straight}[\section]
+%\renewcommand{\thesubsection}{\arabic{subsection}}
+\titleformat{\subsubsection}
+  {\normalfont\bfseries}   % The style of the section title
+  {}                             % a prefix
+  {0pt}                          % How much space exists between the prefix and the title
+  {\makebox[1.2cm][l]{\thesubsubsection:}}    % How the section is represented
+
+\titlespacing*{\subsubsection}{0pt}{*0.8}{*0.4}
+% Starred variant
+\titleformat{name=\subsubsection,numberless}
+  {\normalfont\bfseries}
+  {}
+  {0pt}
+  {}
+\titlespacing*{name=\subsubsection,numberless}{0pt}{*0.8}{*0.4}
+
 \thispagestyle{empty}
 \pagestyle{fancy}
 \AtBeginDocument{
