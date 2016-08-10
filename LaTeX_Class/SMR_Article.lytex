@@ -262,6 +262,24 @@ figures and starting each one with \cmd{ContinuedFloat} before the first
 Referencing subfigures works as expected, so in the above example,
 \verb|Figure~\ref{subfig:en}| yields ``Figure~\ref{subfig:en}''
 
+\subsubsection{Non-floating Figures}
+
+In documents published for printing, figures are ``floated'' to
+the ``nearest convenient place''. But SMR authors may very occasionally
+find it absolutely necessary to place a diagram in-line with the
+text so that it forms part of the narrative flow while also
+giving it a (for example) figure number. In these rare circumstances, one
+might use the following formula:
+
+\begin{verbatim}
+\noindent
+\begin{center} % to keep image and caption on one page
+  ...content
+  \captionof{figure}{The Figure Caption}
+  \label{fig:nonfloatingfigure}
+\end{center}
+\end{verbatim}
+
 \subsection{Citations}
 
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
