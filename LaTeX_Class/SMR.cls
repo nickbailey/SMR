@@ -63,6 +63,9 @@
 \bibliographystyle{humannat}
 \bibpunct[:]{(}{)}{;}{a}{}{,}
 \renewcommand{\refname}{Bibliography}
+\RequirePackage[backref=page]{hyperref}
+%\RequirePackage{hypernat}   % Won't be necessary when hyperref is patched offically
+\renewcommand*{\backref}[1]{[#1]}
 
 %\thetitle gets corrupted on a new \section, so...
 \appendiargdef{\title}{\protected@xdef\@mydoctitle{\thetitle}}
