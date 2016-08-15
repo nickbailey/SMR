@@ -4,8 +4,7 @@
 \usepackage{subcaption}    % for subfigures (including multipage ones)
 \usepackage{polyglossia}   % for foreign languages (foreign to the British, that is)
 \usepackage{filecontents}  % to illustrate citations
-\usepackage{endnotes}      % endnotes, not footnotes
-\usepackage{hyperendnotes} % add hyperlinks to endnotes
+\usepackage{enotez}        % endnotes, not footnotes
 \usepackage{fnpct}         % multiple notes at a single point
 
 \begin{filecontents}{smr.bib}
@@ -92,7 +91,7 @@ mean anything in an on-line document; pages are for printing} are discouraged.
 Footnotes can be created with the \cmd{footnote\{\}} command, but we ask that
 you format them as endnotes either by putting
 \begin{verbatim}
- \usepackage{endnotes}
+ \usepackage{enotez}
  \let\footnote=\endnote
 \end{verbatim}
 in the preamble, or simply using \cmd{endnote\{text\}}\endnote{This is an
@@ -104,15 +103,15 @@ argument\}}.\multendnote{multendnote takes
 a semicolon-separated list of notes;multendnote only takes a single
 argument}
 
-The \cmd{theendnotes} should be placed at the end of the document
+The \cmd{printendnotes} should be placed at the end of the document
 which will cause the endnotes to appear thus:
 
-\theendnotes
-\medskip
+\printendnotes
+%\medskip
 
-To make endnotes have hyperlinks in the same way that footnotes do,
-use the \texttt{hyperendnotes} package, which must be loaded after
-the \texttt{endnotes} one.
+To make endnotes have links back from the note list to where they
+are used, load the package like this:
+\cmd{usepackage[backref=true]\{enotez\}}
 
 \subsection{Figures in the text}
 
