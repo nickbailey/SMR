@@ -1,9 +1,12 @@
 \documentclass{SMR}
 \usepackage{paralist}
-\usepackage{parallel}     % for side-by-side text (e.g. lyrics + translation)
-\usepackage{subcaption}   % for subfigures (including multipage ones)
-\usepackage{polyglossia}  % for foreign languages (foreign to the British, that is)
-\usepackage{filecontents} % to illustrate citations
+\usepackage{parallel}      % for side-by-side text (e.g. lyrics + translation)
+\usepackage{subcaption}    % for subfigures (including multipage ones)
+\usepackage{polyglossia}   % for foreign languages (foreign to the British, that is)
+\usepackage{filecontents}  % to illustrate citations
+\usepackage{endnotes}      % endnotes, not footnotes
+\usepackage{hyperendnotes} % add hyperlinks to endnotes
+\usepackage{fnpct}         % multiple notes at a single point
 
 \begin{filecontents}{smr.bib}
  @book{1965smith_numerical_solution,
@@ -69,23 +72,42 @@ Subsections are numbered per section. This one was obtained by saying
 \cmd{subsection\{Subsection title\}}. \cmd{subsubsection} is also defined.
 
 \subsection{Text appearance}
+\subsubsection{Italics and Emphasis}
 Introduce emphasis like this: \cmd{emph\{Important\}}.
 \emph{Important}: emphasis is a matter of house style.
-We decide what it means.
+We decide what it means. \underline{Avoid} using \cmd{underline\{\}}
+unless there's a pressing technical meaining to the symbol.
 
-%Footnotes\footnote{They break the flow and don't really
-%mean anything in an on-line document; pages are for printing} are discouraged.
-%Here is some text following a figure with a footnote added
-
+\subsubsection{Notes}
+Footnotes\footnote{They break the flow and don't really
+mean anything in an on-line document; pages are for printing} are discouraged.
 Footnotes can be created with the \cmd{footnote\{\}} command, but we ask that
-you format them as endnotes by putting
+you format them as endnotes either by putting
 \begin{verbatim}
  \usepackage{endnotes}
  \let\footnote=\endnote
 \end{verbatim}
-in the preamble and \cmd{theendnotes} at the end of the document.
+in the preamble, or simply using \cmd{endnote\{text\}}\endnote{This is an
+example endnote.} Occasionally, it's necessary to typeset two notes
+at the same place. The \texttt{fnpct} package is the way to do this;
+the notes can be introduced with \cmd{multendnote\{multendnote takes
+a semicolon-separated list of notes;multendnote only takes a single
+argument\}}.\multendnote{multendnote takes
+a semicolon-separated list of notes;multendnote only takes a single
+argument}
 
-Only use single quotes, and type two get double ones. So
+The \cmd{theendnotes} should be placed at the end of the document
+which will cause the endnotes to appear thus:
+
+\theendnotes
+\medskip
+
+To make endnotes have hyperlinks in the same way that footnotes do,
+use the \texttt{hyperendnotes} package, which must be loaded after
+the \texttt{endnotes} one.
+
+\subsubsection{Quotataion marks, hyphens and dashes}
+Only use single quotes, and type two in order to get double ones. So
 \verb!` - `` - ''-'! gives you ` - `` - ''-'. Mutiple dashes
 give access to the different dashes use in properly-typeset documents
 (that was one dash): 80--90\% (two) of people don't understand that
@@ -279,6 +301,11 @@ might use the following formula:
   \label{fig:nonfloatingfigure}
 \end{center}
 \end{verbatim}
+
+Finally, To avoid floats moving too far or breaking into for example the
+bibliography or notes, consider placin a barrier in the text with
+the \cmd{FloatBarrier} command provided by the \texttt{placeins} package.
+This is preferable to the use of non-floating figures.
 
 \subsection{Citations}
 
