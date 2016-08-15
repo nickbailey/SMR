@@ -78,6 +78,14 @@ Introduce emphasis like this: \cmd{emph\{Important\}}.
 We decide what it means. \underline{Avoid} using \cmd{underline\{\}}
 unless there's a pressing technical meaining to the symbol.
 
+\subsubsection{Quotataion marks, hyphens and dashes}
+Only use single quotes, and type two in order to get double ones. So
+\verb!` - `` - ''-'! gives you ` - `` - ''-'. Mutiple dashes
+give access to the different dashes use in properly-typeset documents
+(that was one dash): 80--90\% (two) of people don't understand that
+--- (three) why should they? The typesetter used to have to worry about that
+in the old days.
+
 \subsubsection{Notes}
 Footnotes\footnote{They break the flow and don't really
 mean anything in an on-line document; pages are for printing} are discouraged.
@@ -105,14 +113,6 @@ which will cause the endnotes to appear thus:
 To make endnotes have hyperlinks in the same way that footnotes do,
 use the \texttt{hyperendnotes} package, which must be loaded after
 the \texttt{endnotes} one.
-
-\subsubsection{Quotataion marks, hyphens and dashes}
-Only use single quotes, and type two in order to get double ones. So
-\verb!` - `` - ''-'! gives you ` - `` - ''-'. Mutiple dashes
-give access to the different dashes use in properly-typeset documents
-(that was one dash): 80--90\% (two) of people don't understand that
---- (three) why should they? The typesetter used to have to worry about that
-in the old days.
 
 \subsection{Figures in the text}
 
@@ -196,7 +196,7 @@ related. Otherwise separate figures are preferred, as they can be
 distributed more equitably and therefore typeset more beautifully.
 
 To typeset subfigures, say \cmd{usepackage\{subcaption\}} in the
-document preamble. This packaged replaces older pacakges with similar
+document preamble. This package replaces older pacakges with similar
 names which are now deprecated.
 
 \begin{figure}
