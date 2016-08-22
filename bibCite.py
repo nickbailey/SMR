@@ -76,16 +76,19 @@ class bibCite():
 
                 # find the year
                 yr = re.search(r'(year *= *\{.+\})', s)
-                
-                year = s[s.index('{', yr.span()[0])+1:yr.span()[1]-1]
+                if yr is None:
+                    year = ""
+                else:    
+                    year = s[s.index('{', yr.span()[0])+1:yr.span()[1]-1]
 
                 # find the author
                 athr = re.search(r'(author *= *\{.+\})', s)
                 # if there is no author, lok for an editor
                 if athr is None:
                     athr = re.search(r'(editor *= *\{.+\})', s)
-
-                authorStr = s[s.index('{', athr.span()[0]):athr.span()[1]-1]
+                    authorStr = "UNKNOWN"
+                else:
+                    authorStr = s[s.index('{', athr.span()[0]):athr.span()[1]-1]
 
                 # find the number of authors
                 authorCount = authorStr.split().count('and') + 1

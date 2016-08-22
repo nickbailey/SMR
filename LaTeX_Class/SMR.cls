@@ -59,7 +59,7 @@
 \RequirePackage{titling}
 %
 % Bibliography and citation styles
-\RequirePackage[round]{natbib}
+\RequirePackage[round,sort&compress]{natbib}
 \bibliographystyle{humannat}
 \bibpunct[:]{(}{)}{;}{a}{}{,}
 \renewcommand{\refname}{Bibliography}
