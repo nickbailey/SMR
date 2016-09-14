@@ -712,7 +712,7 @@ Comprehesive \LaTeX{} Symbol List}.
 Links to audio and video files can be accommodated in a way which produces
 a clickable icon when read on-line, but which becomes invisible when
 printed. The following utility command is provided:
-\cmd{\screenOnly\{This won't print\}}.
+\cmd{screenOnly\{This won't print\}}.
 
 Multimedia files are specified by their URL, and can be linked to the
 SMR document using \cmd{mediaLink}. \cmd{mediaLink} takes one mandatory
