@@ -75,7 +75,7 @@
 \RequirePackage{fontawesome}
 \newcommand{\screenOnly}[1]{\begin{ocg}[printocg=never]{Notprinted}{noprint}{1}#1\end{ocg}}
 % see http://mirrors.ctan.org/info/symbols/comprehensive/rawtables-a4.pdf
-\newcommand{\mediaLink}[2][]{\screenOnly{\href{#2}{\faVolumeUp\ifx#1\empty\else~#1\fi}}}
+\newcommand{\mediaLink}[2][]{\screenOnly{\href{#2}{\faVolumeUp\ifx#1\empty\relax\else~#1\fi}}}
 
 %\thetitle gets corrupted on a new \section, so...
 \appendiargdef{\title}{\protected@xdef\@mydoctitle{\thetitle}}
