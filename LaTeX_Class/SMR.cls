@@ -67,6 +67,16 @@
 %\RequirePackage{hypernat}   % Won't be necessary when hyperref is patched offically
 \renewcommand*{\backref}[1]{[#1]}
 
+%
+% We'd like to make media references visible only on-screen,
+% and not print on the paper copy
+%
+\RequirePackage{ocg-p}
+\RequirePackage{fontawesome}
+\newcommand{\screenOnly}[1]{\begin{ocg}[printocg=never]{Notprinted}{noprint}{1}#1\end{ocg}}
+% see http://mirrors.ctan.org/info/symbols/comprehensive/rawtables-a4.pdf
+\newcommand{\mediaLink}[2][]{\screenOnly{\href{#2}{\faVolumeUp\ifx#1\empty\else~#1\fi}}}
+
 %\thetitle gets corrupted on a new \section, so...
 \appendiargdef{\title}{\protected@xdef\@mydoctitle{\thetitle}}
 
@@ -175,8 +185,8 @@
 
 \thispagestyle{empty}
 \pagestyle{fancy}
-\AtBeginDocument{
-}
+%\AtBeginDocument{
+%}
 % \par
 % \vspace*{0.5ex plus 0.3ex minus 0.2ex}
 % \begin{center}

@@ -1,4 +1,24 @@
 \documentclass{SMR}
+
+%
+% This file uses lilypond inclusions.
+%
+% You can build it like this:
+%
+%	lilypond-book --output=Article SMR_Article.lytex
+%	( cd Article/ ; xelatex SMR_Article.tex )
+%	( cd Article/ ; bibtex SMR_Article )
+%	( cd Article/ ; xelatex SMR_Article.tex && xelatex SMR_Article.tex )
+%
+% Make the pdf file visible in your current directory if necessary,
+% otherwise multimedia files won't be found correctly
+%
+%	ln -s Article/SMR_Article.pdf
+%
+% (that command need only be issued once).
+%
+
+
 \usepackage{paralist}
 \usepackage{parallel}      % for side-by-side text (e.g. lyrics + translation)
 \usepackage{subcaption}    % for subfigures (including multipage ones)
@@ -601,7 +621,6 @@ For example:
  \renewcommand{\ParallelAtEnd}{With thanks to \url{http://www.sacred-texts.com/cla/hh/hh1000.htm}}
 \end{Parallel}
 
-
 \subsection{Music glyphs}
 This style requires the lilyglyphs package (spelt
 	\textit{lily}%
@@ -617,6 +636,13 @@ is available on
 \href{http://mirrors.ctan.org/macros/luatex/latex/lilyglyphs/documentation/lilyglyphs.pdf}{CTAN}.
 Glyphs are included through their names, and most are guessable, but a necessarily abbreviated
 crib sheet follows.
+
+For a comprehensive list of other symbols, refer to
+\href{http://fontawesome.io/cheatsheet/}{The fontawesome package cheatsheet}
+(fontawesome is required by the SMR class) or to
+\href{http://tug.ctan.org/info/symbols/comprehensive/symbols-a4.pdf}{The
+Comprehesive \LaTeX{} Symbol List}.
+
 
 \begin{table*}
 {\small
@@ -681,6 +707,22 @@ crib sheet follows.
 \caption{Get-you-started-quick crib sheet for music glyphs in the body text}
 \end{table*}
 
+\section{Linked Multimedia Inclusions}
 
+Links to audio and video files can be accommodated in a way which produces
+a clickable icon when read on-line, but which becomes invisible when
+printed. The following utility command is provided:
+\cmd{\screenOnly\{This won't print\}}.
+
+Multimedia files are specified by their URL, and can be linked to the
+SMR document using \cmd{mediaLink}. \cmd{mediaLink} takes one mandatory
+and one optional variable. If the media file is in the same directory
+as the pdf file:
+
+\begin{verbatim}
+\mediaLink[Send Mail]{arrow2.webm}
+\end{verbatim}
+
+produces: \mediaLink[Send Mail]{arrow2.webm}
 
 \end{document}
