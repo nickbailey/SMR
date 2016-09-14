@@ -723,6 +723,14 @@ as the pdf file:
 \mediaLink[Send Mail]{arrow2.webm}
 \end{verbatim}
 
+\noindent
 produces: \mediaLink[Send Mail]{arrow2.webm}
+
+Although the above example uses a relative URI for the media source
+for brevity, it's usually better to use a fully qualified URL with
+an http protocol. Using relative URIs currently appears to produce
+different behaviour depending on the combination of the reader's
+platform, browser, and installed media rendering libraries
+(as of September~2016).
 
 \end{document}
