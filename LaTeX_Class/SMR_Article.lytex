@@ -26,6 +26,7 @@
 \usepackage{filecontents}  % to illustrate citations
 \usepackage{enotez}        % endnotes, not footnotes
 \usepackage{fnpct}         % multiple notes at a single point
+\usepackage{multicol}
 
 \begin{filecontents}{smr.bib}
  @book{1965smith_numerical_solution,
@@ -43,11 +44,11 @@
 
 %who and where
 \smrtitle{SMR.cls}
-\smrauthor{Marcin and Nick}
-\smraffiliation{Edinburgh and Glasgow Universities}
+\smrauthor{Nick and Marcin}
+\smraffiliation{Glasgow and Edinburgh Universities}
 
 \title{Scottish Music Review class file for XeLaTeX}
-\author{Marcin Pietryszwski \and Nick Bailey}
+\author{Bailey, Nick \and Pietryszwski, Marcin}
 
 
 \begin{document}
@@ -60,7 +61,7 @@
 A class for the Scottish Music Review
 \end{abstract}
 
-\section{Section One} %section title comes here,
+\section{Document Structure} %section title comes here,
 
 $\ldots$which you get by typing ``\cmd{section\{Section One\}}''
 The usual title, author and date commands given in the preamble
@@ -82,7 +83,7 @@ the \cmd{begin\{document\}} I said
 \smraffiliation{Edinburgh and Glasgow Universities}
 
 \title{Scottish Music Review class file for XeLaTeX}
-\author{Pietryszwski, Marcin \and Bailey, Nick}
+\author{Bailey, Nick \and Pietryszwski, Marcin}
 \end{verbatim}
 
 \subsection{A Subsection} %subsections
@@ -133,32 +134,79 @@ To make endnotes have links back from the note list to where they
 are used, load the package like this:
 \cmd{usepackage[backref=true]\{enotez\}}
 
+\subsection{Bullet points and lists}
+
+\begin{multicols}{2}
+\raggedcolumns
+{\small
+\begin{verbatim}
+\begin{itemize}
+ \item Bullet points use the
+       \textbf{itemize} environment.
+ \begin{enumerate}
+  \item Numbered lists use \textbf{enumerate}
+  \begin{enumerate}
+   \item Lists can be nested.
+  \end{enumerate}
+ \end{enumerate}
+\end{itemize}
+
+\begin{description}
+ \item [Sometimes] you need a description list.
+ \item [The Internet] will describe all of the
+       options available to the
+       different list environments:
+       you can even define your own.
+\end{description}
+\end{verbatim}
+}
+\columnbreak
+\textbf{Result:}\par\noindent
+\begin{itemize}
+ \item Bullet points use the \textbf{itemize} environment.
+ \begin{enumerate}
+  \item Numbered lists use \textbf{enumerate}
+  \begin{enumerate}
+   \item Lists can be nested
+  \end{enumerate}
+ \end{enumerate}
+\end{itemize}
+
+\begin{description}
+ \item [Sometimes] you need a description list.
+ \item [The Internet] will describe all of the
+       options available to the
+       different list environments: you can even
+       define your own.
+\end{description}
+\end{multicols}
+
+
 \subsection{Figures in the text}
 
 In \LaTeX, figures ``float'' (i.e. get placed where they look right).
 It's best to use PDF files or PNG files, reserving JPEG files
 for when there are actual photos. Otherewise there will be nasty artefacts.
 
-Here is some text to be formatted followed by a figure of
-a Klein Bottle as an example of how graphics are formatted
+Here is some text to be formatted followed by a 
+photograph of a tree as an example of how graphics are formatted
 in this template.
 \begin{figure}[h]
-\caption{An included graphic. See how fuzzy it looks?}
+\caption{An included photograph.}
 \label{f:graphicexample} % Not before the caption!
 \centering
-\includegraphics[width=0.5\textwidth]{klein.jpg}
+\includegraphics[width=0.5\textwidth]{leaves.jpg}
 \end{figure}
 
 To get it I said
 \begin{verbatim}
 \begin{figure}[h]
-\caption{An included graphic. See how fuzzy it looks?}
+\caption{An included photograph.}
 \label{f:graphicexample} % Not before the caption!
 \centering
 \includegraphics[width=0.5\textwidth]{klein.jpg}
 \end{figure}
 \end{verbatim}
-which flagrently disregards what I said about JPEG diagrams, but there you go.
 
 In particular, \emph{do not} use any raster format for musical score.
 None of them play nice with the long horizontal lines on the staves
