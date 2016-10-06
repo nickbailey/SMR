@@ -185,6 +185,14 @@
 
 \thispagestyle{empty}
 \pagestyle{fancy}
+
+% Customise apperance of links
+\hypersetup{
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
 %\AtBeginDocument{
 %}
 % \par
