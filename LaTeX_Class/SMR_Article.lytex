@@ -763,22 +763,25 @@ printed. The following utility command is provided:
 \cmd{screenOnly\{This won't print\}}.
 
 Multimedia files are specified by their URL, and can be linked to the
-SMR document using \cmd{mediaLink}. \cmd{mediaLink} takes one mandatory
+SMR document using \cmd{audioLink}. \cmd{audioLink} takes one mandatory
 and one optional variable. If the media file is in the same directory
-as the pdf file:
+as the PDF file:
 
 \begin{verbatim}
 \mediaLink[Send Mail]{arrow2.webm}
 \end{verbatim}
 
 \noindent
-produces: \mediaLink[Send Mail]{arrow2.webm}
+produces: \audioLink[Send Mail]{arrow2.webm}. 
+\cmd{videoLink} behaves similarly, but uses the symbol
+\faFilm{} instead of \faVolumeUp.
 
 Although the above example uses a relative URI for the media source
 for brevity, it's usually better to use a fully qualified URL with
 an http protocol. Using relative URIs currently appears to produce
 different behaviour depending on the combination of the reader's
 platform, browser, and installed media rendering libraries
-(as of September~2016).
+(as of September~2016). We prefer to store both audio and video
+media in \texttt{webm} containers.
 
 \end{document}
