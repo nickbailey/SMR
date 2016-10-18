@@ -806,7 +806,7 @@ and one optional variable. If the media file is in the same directory
 as the PDF file:
 
 \begin{verbatim}
-\mediaLink[Send Mail]{arrow2.webm}
+\audioLink[Send Mail]{arrow2.webm}
 \end{verbatim}
 
 \noindent
