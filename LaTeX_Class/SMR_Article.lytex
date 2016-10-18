@@ -22,11 +22,19 @@
 \usepackage{paralist}
 \usepackage{parallel}      % for side-by-side text (e.g. lyrics + translation)
 \usepackage{subcaption}    % for subfigures (including multipage ones)
-\usepackage{polyglossia}   % for foreign languages (foreign to the British, that is)
 \usepackage{filecontents}  % to illustrate citations
 \usepackage{enotez}        % endnotes, not footnotes
 \usepackage{fnpct}         % multiple notes at a single point
 \usepackage{multicol}
+\usepackage{polyglossia}   % for foreign languages (foreign to the British, that is)
+\setotherlanguage{hebrew}
+% Workaround bug in Bidi package
+\makeatletter\@Latintrue\makeatother
+\newfontfamily\hebrewfont[Script=Hebrew]{David CLM}
+\setotherlanguage{greek}
+\newfontfamily\greekfont[Script=Greek,Ligatures=TeX]{Linux Libertine O} % Has Greek characters
+\setmainlanguage{english}
+
 
 \begin{filecontents}{smr.bib}
  @book{1965smith_numerical_solution,
@@ -49,7 +57,6 @@
 
 \title{Scottish Music Review class file for XeLaTeX}
 \author{Bailey, Nick \and Pietryszwski, Marcin}
-
 
 \begin{document}
 
@@ -650,8 +657,6 @@ these can be achieved as follows:
 
 For example:
 
-\setotherlanguage{greek}
-\newfontfamily\greekfont[Script=Greek,Ligatures=TeX]{Linux Libertine O} % Has Greek characters
 \begin{Parallel}[c]{}{} %Miss out the widths and it chooses for you; v = vertical line; p = page by page
  \ParallelRText{This is the Showing forth of the Inquiry of Herodotus of Halicarnassos,
  to the end that neither the deeds of men may be forgotten by lapse of time,
@@ -668,6 +673,39 @@ For example:
  \ParallelRText{Those of the Persians who have knowledge of history declare that the Phenicians first began the quarrel.}
  \renewcommand{\ParallelAtEnd}{With thanks to \url{http://www.sacred-texts.com/cla/hh/hh1000.htm}}
 \end{Parallel}
+
+\subsection{Multilingual text}
+
+Papers which make much use of languages other than (British) English
+might want to inlcude the \href{http://tug.ctan.org/macros/xetex/latex/polyglossia/polyglossia.pdf}{\texttt{polyglossia}}
+package. The Greek in this example was typeset using
+\begin{verbatim}
+\setotherlanguage{greek}
+\newfontfamily\greekfont[Script=Greek,Ligatures=TeX]{Linux Libertine O}
+\end{verbatim}
+and enclosing the greek text within a \cmd{begin\{greek\}} ... \cmd{end\{greek\}}
+environment. Shorter spans of text can be set with
+\cmd{text\textsc{language}\{...\}}.
+
+\begin{multicols}{2}
+\raggedcolumns
+
+Multiple languages and typesetting directions can be accommodated
+so long as the appropriate fonts and language packages are available
+on your system.
+
+\columnbreak
+
+\begin{raggedleft}
+\textbf\Large\frenchspacing Psalms:130\\
+\texthebrew{
+א  שִׁיר הַמַּעֲלוֹת
+\\
+מִמַּעֲמַקִּים קְרָאתִיךָ    יְהוָה.
+\\}
+\end{raggedleft}
+
+\end{multicols}
 
 \subsection{Music glyphs}
 This style requires the lilyglyphs package (spelt
