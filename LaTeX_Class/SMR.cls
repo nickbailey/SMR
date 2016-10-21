@@ -60,7 +60,7 @@
 %
 % Bibliography and citation styles
 \RequirePackage[round,sort&compress]{natbib}
-\bibliographystyle{humannat}
+\bibliographystyle{plainnat}
 \bibpunct[:]{(}{)}{;}{a}{}{,}
 \renewcommand{\refname}{Bibliography}
 \RequirePackage[backref=page]{hyperref}
