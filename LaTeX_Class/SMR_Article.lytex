@@ -29,7 +29,7 @@
 \usepackage{polyglossia}   % for foreign languages (foreign to the British, that is)
 \setotherlanguage{hebrew}
 % Workaround bug in Bidi package
-\makeatletter\@Latintrue\makeatother
+%\makeatletter\@Latintrue\makeatother
 \newfontfamily\hebrewfont[Script=Hebrew]{David CLM}
 \setotherlanguage{greek}
 \newfontfamily\greekfont[Script=Greek,Ligatures=TeX]{Linux Libertine O} % Has Greek characters

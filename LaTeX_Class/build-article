@@ -1,0 +1,7 @@
+#!/bin/sh
+lilypond-book --output Article SMR_Article.lytex && \
+( cd Article ; xelatex SMR_Article.tex ) && \
+( cd Article ; bibtex SMR_Article ) && \
+( cd Article ; xelatex SMR_Article.tex && xelatex SMR_Article.tex)
+
+
