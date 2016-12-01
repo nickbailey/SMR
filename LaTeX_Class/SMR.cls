@@ -59,8 +59,9 @@
 \RequirePackage{titling}
 %
 % Bibliography and citation styles
-\RequirePackage[round,sort&compress]{natbib}
-\bibliographystyle{plainnat}
+\RequirePackage[round,merge,sort&compress]{natbib}
+%\bibliographystyle{plainnat}
+\bibliographystyle{SMR}
 \bibpunct[:]{(}{)}{;}{a}{}{,}
 \renewcommand{\refname}{Bibliography}
 \RequirePackage[backref=page]{hyperref}
@@ -193,6 +194,9 @@
     citecolor={blue!50!black},
     urlcolor={blue!80!black}
 }
+
+% Don't put the date on the individual papers.
+\date{}
 %\AtBeginDocument{
 %}
 % \par
