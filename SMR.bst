@@ -1175,6 +1175,10 @@ FUNCTION {inbook}
     }
   if$
   format.date "year" output.check
+  translator missing$
+    'skip$
+    { format.translators "translator" output.check }
+  if$
   date.block
   format.btitle "title" output.check
   crossref missing$
