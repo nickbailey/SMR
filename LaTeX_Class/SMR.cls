@@ -66,7 +66,17 @@
 \renewcommand{\refname}{Bibliography}
 \RequirePackage[backref=page]{hyperref}
 %\RequirePackage{hypernat}   % Won't be necessary when hyperref is patched offically
-\renewcommand*{\backref}[1]{[#1]}
+% For simple page references after the bibliography entry:
+%\renewcommand*{\backref}[1]{[#1]}
+% More sophisticated with explanatory text for those not accustomed to back references
+% Thanks: http://tex.stackexchange.com/questions/183702/formatting-back-references-in-bibliography-bibtex
+\renewcommand*{\backref}[1]{}
+\renewcommand*{\backrefalt}[4]{{\footnotesize[%
+    \ifcase #1 Not cited%
+          \or Cited on page~#2%
+          \else Cited on pages #2%
+    \fi%
+    ].}}
 
 %
 % We'd like to make media references visible only on-screen,

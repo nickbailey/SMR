@@ -1,3 +1,5 @@
+% SMR.bst (2016-12-02)
+% Modified by Nick Bailey <nick@n-ism.org> from the original
 % chicago2.bst (2007-10-18)
 % Chung-chieh Shan <ccshan@post.harvard.edu>
 %
@@ -80,6 +82,7 @@ ENTRY
     publisher
     school
     series
+    translator
     title
     type
     volume
@@ -460,7 +463,7 @@ FUNCTION {format.names}
             { bib.fname.font ", " swap$ * }
           if$
         }
-        { "{vv~}{ll}" format.name$ bib.name.font
+        { "{vv~}{{\scshape\bgroup}ll{ }{\egroup}}" format.name$ bib.name.font
           s nameptr
           "{ff}{, jj}"
           format.name$ duplicate$ empty$ 'skip$
@@ -698,6 +701,17 @@ FUNCTION {make.full.names}
   if$
 }
 
+FUNCTION {format.translators}
+{   output.state after.sentence = 
+    output.state after.block =
+  or
+    { "T" }
+    { "t" }
+  if$
+  "ranslated by " *
+  translator "translator" format.names.ed *
+}
+
 FUNCTION {output.bibitem}
 { newline$
   "\bibitem[{" write$
@@ -746,13 +760,15 @@ FUNCTION {word.in}
 
 FUNCTION {format.date}
 { year "year" bibinfo.check duplicate$ empty$
-    {
-    }
     'skip$
+    {
+      " (" swap$ *
+      extra.label *
+      ")" *
+    }
   if$
-  extra.label *
-  before.all 'output.state :=
   after.sentence 'output.state :=
+  before.all 'output.state :=
 }
 FUNCTION {format.btitle}
 { title "t" change.case$ "title" bibinfo.check
@@ -1035,7 +1051,8 @@ FUNCTION {format.org.or.pub}
   if$
 }
 FUNCTION {format.publisher.address}
-{ publisher "publisher" bibinfo.warn format.org.or.pub
+{ "(" publisher "publisher" bibinfo.warn format.org.or.pub *
+  ")" *
 }
 
 FUNCTION {format.organization.address}
@@ -1101,6 +1118,10 @@ FUNCTION {book}
     }
   if$
   format.date "year" output.check
+  translator missing$
+    'skip$
+    { format.translators "translator" output.check }
+  if$
   date.block
   format.btitle "title" output.check
   crossref missing$
