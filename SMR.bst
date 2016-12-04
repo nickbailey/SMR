@@ -1701,4 +1701,4 @@ FUNCTION {end.bib}
 EXECUTE {end.bib}
 %% End of customized bst file
 %%
-%% End of file `chicago2.bst'.
+%% End of file `SMR.bst'.

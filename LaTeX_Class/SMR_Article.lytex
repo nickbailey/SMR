@@ -18,7 +18,6 @@
 % (that command need only be issued once).
 %
 
-
 \usepackage{paralist}
 \usepackage{parallel}      % for side-by-side text (e.g. lyrics + translation)
 \usepackage{subcaption}    % for subfigures (including multipage ones)
@@ -35,17 +34,312 @@
 \newfontfamily\greekfont[Script=Greek,Ligatures=TeX]{Linux Libertine O} % Has Greek characters
 \setmainlanguage{english}
 
-
 \begin{filecontents}{smr.bib}
- @book{1965smith_numerical_solution,
+@book{1965smith_numerical_solution,
 	title={Numerical Solution of Partial Differential Equations},
 	author={Smith, G D},
 	year={1965},
 	publisher={Oxford University Press},
-	location={London/New York},
+	address={London/New York},
+	note={This is the example entry for the section on citations.}
+}
+@Article{article,
+ author = {Author, First and Author, Second and Author, Third},
+ title = {The Title},
+ journal = {The Journal},
+ year = {2016},
+key = {Optional  Key},
+volume = {Optional  Volume},
+number = {Optional  Number},
+pages = {Optional Start Page -- End Page},
+month = {Optional Month},
+note = {Use the \textbf{Article} type for an Article in a Journal},
+annote = {Optional Annotation},
+url = {Optional URL},
+urldate = {Optional URL Creation Date},
+lastchecked = {Optional Last Checked Date},
+doi = {Optional DOI Number},
+isbn = {Optional ISBN Number},
+issn = {Optional ISSN Number},
+localfile = {Optional Local File},
+abstract = {Optional Abstract Text},
+keywords = {Keyword1,Keyword2}
+}
+@Book{book,
+ title = {The Title},
+ publisher = {The Volume},
+ year = {2016},
+author = {Author, First and Author, Second and Author, Third},
+key = {The Key},
+volume = {The Volume},
+series = {The Series},
+address = {Publisher's Address},
+edition = {The Edition},
+month = {The Month},
+note = {Use the \textbf{Book} type to cite a book by \emph{either} Author \emph{or} Editor},
+annote = {An Annotation},
+url = {The URL},
+urldate = {URL Creation Date},
+lastchecked = {URL Last Checked Date},
+doi = {DOI Number},
+isbn = {ISBN Number},
+issn = {ISSN Number},
+localfile = {The Local File},
+abstract = {Abstract Text},
+keywords = {Keyword1, Keyword2},
+translator = {The Translator}
+}
+@Booklet{booklet,
+ title = {The Title},
+key = {Optional Key},
+author = {Author, First and Author, Second and Author, Third},
+howpublished = {Optional How Published},
+address = {Optional Publisher's Address},
+month = {Optional  Month},
+year = {Optional --- 2016},
+note = {Use \textbf{Booklet} for This Variation on the Book layout},
+annote = {Optional Annotation},
+url = {Optional  URL},
+urldate = {Optional URL Date},
+lastchecked = {Optional Date URL last checked},
+doi = {Optional DOI Number},
+issn = {Optional ISSN Number},
+localfile = {Optional  Local File},
+abstract = {Optional Abstract Text},
+keywords = {Keyword1,Keyword2}
+}
+@InBook{inbook,
+ title = {Book Title},
+ chapter = {Numerical Chapter},
+ publisher = {The Publisher},
+ year = {2016},
+ author = {Author, First and Author, Second and Author, Third},
+key = {Optional Key},
+volume = {Optional Volume},
+series = {Optional Series},
+type = {Optional Type of Inclusion},
+address = {Optional Publisher's Address},
+edition = {Optional  Edition},
+month = {Optional  Month},
+pages = {Optional Start Page -- End Page},
+note = {Use \textbf{InBook} for chapters or pages in a book. \textit{However, with the SMR
+            style, you almost certainly want to use the \cmd{cite} family's
+            optional arguments for page ranges etc in the citation, and used
+            Book in the .bib file instead.}},
+annote = {Optional  Annotation},
+url = {Optional The URL},
+urldate = {Optional URL Date},
+lastchecked = {Optional Date URL Checked},
+doi = {Optional DOI number},
+isbn = {Optional ISBD Number},
+issn = {Optional ISSN Number},
+localfile = {Optional  Local File},
+abstract = {Optional Abstract Text},
+keywords = {Keyword1,Keyword2},
+translator = {Optional Translator}
+}
+@InCollection{incollection,
+ author = {Author, First},
+ title = {The Title},
+ booktitle = {The Book Title},
+key = {Optional Key},
+pages = {Optional Page -- End Page},
+publisher = {Optional Publisher},
+year = {Optional --- 2016},
+editor = {Optional Editor},
+volume = {Optional Volume},
+series = {Optional Series},
+type = {Optional Type of Chapter},
+chapter = {Optional Numeric Chapter},
+address = {Optional Publisher's Address},
+edition = {Optional  Edition},
+month = {Optional  Month},
+note = {Use \textbf{InCollection} for a Titled Chapter in a Book.
+            It's normally the one you want (rahter than inbook)},
+annote = {Optional  Annotation},
+url = {Optional  URL},
+urldate = {Optional Date URL Created},
+lastchecked = {Optional Date URL was Last Checked},
+doi = {Optional DOI Number},
+isbn = {Optional ISBN Number},
+issn = {Optional ISSN Number},
+localfile = {Optional  Local File},
+abstract = {Optional Abstract Text},
+keywords = {Keyword1,Keyword2,Keyword3}
+}
+@InProceedings{inproceedings,
+ author = {Author, First and Author, Second and Author, Third},
+ title = {The Title},
+ booktitle = {The Book Title},
+key = {Optional Key},
+pages = {Optional Start Page -- End Page},
+year = {Optional --- 2016},
+editor = {Optional Editor},
+volume = {Optional Volume},
+series = {Optional Series},
+address = {Optional Publisher's Address},
+month = {Optional Month},
+organization = {Optional Organization},
+publisher = {Optional Publisher},
+note = {\textbf{InProceedings} is the one to use for an Article in a Conference Proceedings.
+        \textbf{Conference} is a synonym for InProceedings},
+annote = {Optional Annotation},
+url = {Optional URL},
+urldate = {Optional Date URL Created},
+lastchecked = {Optional Date URL Last Checked},
+doi = {Optional DOI Number},
+isbn = {Optional ISBN Number},
+issn = {Optional ISSN Number},
+localfile = {Optional Local File},
+abstract = {Optional Abstract Text},
+keywords = {Keyword1,Keyword2,Keyword3}
+}
+@Manual{manual,
+ title = {The Title},
+key = {Optional Key},
+author = {Optional Author},
+organization = {Optional Organization},
+address = {Optional Publisher's Address},
+edition = {Optional Edition},
+month = {Optional Month},
+year = {Optional Year},
+note = {\textbf{Manual} is used for citing Technical Manuals},
+annote = {Optional Annotation},
+url = {Optional URL},
+urldate = {Optional URL Date},
+lastchecked = {Optional Date URL Last Checked},
+doi = {Optional DOI Number},
+isbn = {Optional ISBN Number},
+issn = {Optional ISSN Number},
+localfile = {Optional Local File},
+abstract = {Optional Abstract Text},
+keywords = {Keyword1,Keyword2,Keyword3}
+}
+@MastersThesis{mastersthesis,
+ author = {Author, First},
+ title = {The Title},
+ school = {The School},
+ year = {2016},
+key = {Optional Key},
+type = {Optional Type},
+address = {Optional Address},
+month = {Optional Month},
+note = {\textbf{MastersThesis} can be used to cite a Masters Thesis},
+annote = {Optional Annotation},
+url = {Optional URL},
+urldate = {Optional Date of URL},
+lastchecked = {Optional Date URL Last Checked},
+doi = {Optional DOI Number},
+issn = {Optional ISSN Number},
+localfile = {Optional Local File},
+abstract = {Optional Abstract Text},
+keywords = {Keyword1,Keyword2,Keyword3}
+}
+@Misc{misc,
+key = {Optional Key},
+author = {Optional Author},
+title = {Optional Title},
+howpublished = {Optional How Published},
+month = {Optional Month},
+year = {Optional --- 2016!},
+note = {\textbf{Misc} can be used for ``Everything Else''. Every Single Field is Optional.},
+annote = {Optional Annotation},
+url = {Optional URL},
+urldate = {Optional Date},
+lastchecked = {Optional Date URL Last Checked},
+doi = {Optional DOI Number},
+isbn = {Optional ISBN Number},
+issn = {Optional ISSN Number},
+localfile = {Optional Local File},
+abstract = {Optional Abstract Text},
+keywords = {Keyword1,Keyword2,Keyword3}
+}
+@PhdThesis{phdthesis,
+ author = {Author, First and Author, Second and Author, Third},
+ title = {The Title},
+ school = {The School},
+ year = {2016},
+key = {Optional Key},
+type = {Optional Type},
+address = {Optional Address},
+month = {Optional Month},
+note = {\textbf{PhDThesis} is used to cite PhD Dissertations.},
+annote = {Optional Annotation},
+url = {Optional URL},
+urldate = {Optional URL Date},
+lastchecked = {Optional Date URL Last Checked},
+doi = {Optional DOI Number},
+isbn = {Optional ISBN Number},
+issn = {Optional ISSN Number},
+localfile = {Optional Local File},
+abstract = {Optional Abstract Text},
+keywords = {Keyword1,Keyword2,Keyword3}
+}
+@Proceedings{proceedings,
+ title = {The Title},
+ year = {2016},
+key = {Optional Key},
+editor = {Optional Editor},
+volume = {Optional Volume},
+series = {Optional Series},
+address = {Optional Address},
+month = {Optional Month},
+organization = {Optional Organization},
+publisher = {Optional Publisher},
+note = {\textbf{Proceedings} is used to cite Conference Proceedingts as a Whole},
+annote = {Optional Annotation},
+url = {Optional URL},
+urldate = {Optional URL Date},
+lastchecked = {Optional Date URL Last Checked},
+doi = {Optional DOI Number},
+isbn = {Optional ISBN Number},
+issn = {Optional ISSN Number},
+localfile = {Optional Local File},
+abstract = {Optional Abstract Text},
+keywords = {Keyword1,Keyword2,Keyword3}
+}
+@TechReport{techreport,
+ author = {Author, First and Author, Second and Author, Third},
+ title = {The Title},
+ institution = {The Institution},
+ year = {2016},
+key = {Optional Key},
+type = {Optional Type},
+number = {Optional Number},
+address = {Optional Address},
+month = {Optional Month},
+note = {\textbf{TechReport} can be used to Create Bibliography Entries for Technical Reports},
+annote = {Optional Annotation},
+url = {Optional URL},
+urldate = {Optional URL Date},
+lastchecked = {Optional Date URL Last Checked},
+doi = {Optional DOI Number},
+isbn = {Optional ISBN Number},
+issn = {Optional ISSN Number},
+localfile = {Optional Local File},
+abstract = {Optional Abstract Text},
+keywords = {Keyword1,Keyword2,Key}
+}
+@Unpublished{unpublished,
+ author = {Author, First and Author, Second and Author, Third},
+ title = {The Title},
+ note = {\textbf{Unpublished} can be used where a Bibliographic Entry is
+ Incomplete because it is Not Yet (or Won't Be) Published},
+key = {Optional Key},
+month = {Optional Month},
+year = {Optional Year},
+annote = {Optional Annotation},
+url = {Optional URL},
+urldate = {Optional URL Date},
+lastchecked = {Optional Date URL Last Checked},
+doi = {Optional DOI Number},
+isbn = {Optional ISBN Number},
+issn = {Optional ISSN Number},
+localfile = {Optional Local File},
+abstract = {Optional Abstract Text},
+keywords = {Keyword1,Keyword2,Keyword3}
 }
 \end{filecontents}
-
 
 %graphics
 \graphicspath{ {/Where/you/keep/your/graphics} }  % <- UPDATE THE PATH
@@ -399,7 +693,7 @@ using the \texttt{natbib} package, so if the \texttt{.bib} file contains
 	author={Smith, G D},
 	year={1965},
 	publisher={Oxford University Press},
-	location={London/New York},
+	address={London/New York}
 }
 \end{verbatim}
 
@@ -414,6 +708,9 @@ PDEs can be fun~\citep{1965smith_numerical_solution}.
 
 and saying \cmd{bibliography\{your\_bib\_file\}} at the place where
 the bibliography should appear.
+
+% I'm going to cheat shamelessly because I can't be bothered to do
+% multiple bibliography entries per article
 
 If you want the author name to be printed and not parenthesised, 
 like ``\cite{1965smith_numerical_solution} liked PDEs''
@@ -434,8 +731,9 @@ If you use a \LaTeX-aware editor (Kile, Texstudio etc) it's very likely you can
 configure it to do all the above at a single click of the mouse,
 but there are too many such applications to consider them all here.
 
-
-\bibliography{smr}
+You can click the link to jump to the entry, and the "Cited on page..."
+information page lets you navigate back easily. See Section~\ref{s:bibtypes}
+for a list of supported entry types.
 
 \section{Heavy-duty usage}
 
@@ -729,7 +1027,6 @@ For a comprehensive list of other symbols, refer to
 \href{http://tug.ctan.org/info/symbols/comprehensive/symbols-a4.pdf}{The
 Comprehesive \LaTeX{} Symbol List}.
 
-
 \begin{table*}
 {\small
 \begin{tabular}{r|l l}
@@ -792,7 +1089,7 @@ Comprehesive \LaTeX{} Symbol List}.
 }
 \caption{Get-you-started-quick crib sheet for music glyphs in the body text}
 \end{table*}
-
+\clearpage
 \section{Linked Multimedia Inclusions}
 
 Links to audio and video files can be accommodated in a way which produces
@@ -821,5 +1118,21 @@ different behaviour depending on the combination of the reader's
 platform, browser, and installed media rendering libraries
 (as of September~2016). We prefer to store both audio and video
 media in \texttt{webm} containers.
+
+\section{Bibliographic Entry Types}
+\label{s:bibtypes}
+
+The bibliography shows examples of all the entry types supported
+by the SMR bibliographic style. The fields contain capitalised words
+mid-sentence to demonstrate the behaviour with respect to case
+alteration.
+
+Note that some types have mutual exclusivity for some fields. Usually,
+either Author or Editor are to be supplied but not both. It is also
+not usually allowed to specify both the volume and number.
+
+\nocite{article,book,booklet,inbook,incollection,inproceedings,manual,mastersthesis,misc,phdthesis,proceedings,techreport,unpublished}
+
+\bibliography{smr}
 
 \end{document}
