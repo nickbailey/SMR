@@ -64,9 +64,12 @@
 ENTRY
   { address
     archive
+    artist
     author
     booktitle
     chapter
+    composer
+    conductor
     edition
     editor
     eprint
@@ -74,12 +77,15 @@ ENTRY
     institution
     journal
     key
+    medium
     month
     note
     number
     organization
     pages
     publisher
+    recorded
+    release
     school
     series
     translator
@@ -305,6 +311,9 @@ FUNCTION {bbl.rd}
 
 FUNCTION {bbl.th}
 { "th" }
+
+FUNCTION {bbl.conductor}
+{ "Conductor" }
 
 MACRO {jan} {"Jan."}
 
@@ -1354,6 +1363,79 @@ FUNCTION {proceedings}
   format.bvolume output
   new.sentence
   format.number.series output
+  publisher empty$
+    { format.organization.address output }
+    { organization "organization" bibinfo.check output
+      format.publisher.address output
+    }
+  if$
+  new.block
+  format.note output
+  format.eprint output
+  fin.entry
+}
+
+FUNCTION {format.recording.dates}
+{
+  year "year" bibinfo.check duplicate$ empty$
+    'skip$
+    { month missing$
+        'skip$
+        { add.blank swap$ * }
+      if$
+      recorded missing$
+        'skip$
+        { ", Recorded " *
+          recorded *
+        }
+      if$
+      " (" swap$ * ")" *
+    }
+  if$
+  after.sentence 'output.state :=
+  before.all 'output.state :=
+}
+
+FUNCTION {recording}
+{ output.bibitem
+  format.authors "author" output.check
+  author format.key output
+  name.or.dash
+  format.recording.dates "recording dates" output.check
+  date.block
+  format.title emphasize
+  composer missing$
+    { "" }
+    { " (" composer * ")" * }
+  if$
+  * "title" output.check
+  new.block
+  artist missing$
+    { "" }
+    { artist }
+  if$
+  conductor missing$
+    { "" }
+    { ". " bbl.conductor *
+      ": " *
+      conductor *
+    }
+  if$
+  *
+  duplicate$ empty$
+    'pop$
+    { "artist and conductor" output.check }
+  if$
+  new.block
+  medium missing$
+    'skip$
+    { medium "recording medium" output.check }
+  if$
+  new.block
+  release empty$
+    'skip$
+    { release "release" output.check }
+  if$
   publisher empty$
     { format.organization.address output }
     { organization "organization" bibinfo.check output
