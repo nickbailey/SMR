@@ -442,6 +442,11 @@ FUNCTION {format.eprint}
 STRINGS  { bibinfo}
 INTEGERS { nameptr namesleft numnames }
 
+FUNCTION {enquote}
+{
+  "``" swap$ * "''" *
+}
+
 FUNCTION {format.names}
 { 'bibinfo :=
   duplicate$ empty$ 'skip$ {
@@ -755,8 +760,8 @@ FUNCTION {n.dashify}
 }
 
 FUNCTION {word.in}
-{ bbl.in capitalize
-  " " * }
+{ %bbl.in capitalize
+  bbl.in " " * }
 
 FUNCTION {format.date}
 { year "year" bibinfo.check duplicate$ empty$
@@ -1080,8 +1085,7 @@ FUNCTION {article}
   name.or.dash
   format.date "year" output.check
   date.block
-  format.title "title" output.check
-  new.block
+  format.title enquote "title" output.check
   crossref missing$
     {
       journal
@@ -1090,10 +1094,17 @@ FUNCTION {article}
       "journal" output.check
       format.vol.num.pages duplicate$ empty$
         'pop$
-	{ swap$ add.blank swap$ output }
+	{ volume missing$
+	  number missing$
+	  and
+	    { output }
+	    { swap$ add.blank swap$ output }
+	  if$
+	}
       if$
     }
-    { format.article.crossref output.nonnull
+    { new.block
+      format.article.crossref output.nonnull
       format.pages output
     }
   if$
@@ -1149,7 +1160,7 @@ FUNCTION {booklet}
   name.or.dash
   format.date "year" output.check
   date.block
-  format.title "title" output.check
+  format.title emphasize "title" output.check
   new.block
   howpublished "howpublished" bibinfo.check output
   address "address" bibinfo.check output
@@ -1210,18 +1221,18 @@ FUNCTION {incollection}
   name.or.dash
   format.date "year" output.check
   date.block
-  format.title "title" output.check
-  new.block
+  format.title enquote "title" output.check
   crossref missing$
     { format.in.ed.booktitle "booktitle" output.check
       format.bvolume output
       format.edition output
-      format.chapter.pages output
       new.sentence
       format.number.series output
       format.publisher.address output
+      format.chapter.pages output
     }
-    { format.incoll.inproc.crossref output.nonnull
+    { new.block
+      format.incoll.inproc.crossref output.nonnull
       format.chapter.pages output
     }
   if$
@@ -1237,12 +1248,10 @@ FUNCTION {inproceedings}
   name.or.dash
   format.date "year" output.check
   date.block
-  format.title "title" output.check
-  new.block
+  format.title enquote "title" output.check
   crossref missing$
     { format.in.ed.booktitle "booktitle" output.check
       format.bvolume output
-      format.pages output
       new.sentence
       format.number.series output
       publisher empty$
@@ -1251,8 +1260,11 @@ FUNCTION {inproceedings}
           format.publisher.address output
         }
       if$
+      new.block
+      format.pages output
     }
-    { format.incoll.inproc.crossref output.nonnull
+    { new.block
+      format.incoll.inproc.crossref output.nonnull
       format.pages output
     }
   if$
@@ -1287,8 +1299,7 @@ FUNCTION {mastersthesis}
   name.or.dash
   format.date "year" output.check
   date.block
-  format.title
-  "title" output.check
+  format.title emphasize "title" output.check
   new.block
   bbl.mthesis format.thesis.type output.nonnull
   school "school" bibinfo.warn output
@@ -1306,7 +1317,7 @@ FUNCTION {misc}
   name.or.dash
   format.date "year" output.check
   date.block
-  format.title output
+  format.title emphasize output
   new.block
   howpublished "howpublished" bibinfo.check output
   new.block
@@ -1321,8 +1332,7 @@ FUNCTION {phdthesis}
   name.or.dash
   format.date "year" output.check
   date.block
-  format.title
-  "title" output.check
+  format.title emphasize "title" output.check
   new.block
   bbl.phdthesis format.thesis.type output.nonnull
   school "school" bibinfo.warn output
@@ -1363,8 +1373,7 @@ FUNCTION {techreport}
   name.or.dash
   format.date "year" output.check
   date.block
-  format.title
-  "title" output.check
+  format.title emphasize "title" output.check
   new.block
   format.tr.number output.nonnull
   institution "institution" bibinfo.warn output
@@ -1382,7 +1391,7 @@ FUNCTION {unpublished}
   name.or.dash
   format.date "year" output.check
   date.block
-  format.title "title" output.check
+  format.title emphasize "title" output.check
   new.block
   format.note "note" output.check
   format.eprint output
