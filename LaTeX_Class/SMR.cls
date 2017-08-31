@@ -1,7 +1,7 @@
 % SMR.cls
 %  LaTeX 2e class for the Scottish Music Review
 
-\ProvidesClass{SMR}[2016/06/06 version 1.00 Scottish Music Review]
+\ProvidesClass{SMR}[2016/06/06 version 1.01 Scottish Music Review]
 \NeedsTeXFormat{LaTeX2e}
 
 % Replace the proprietary Adobe InDesign template used to typeset
@@ -53,7 +53,7 @@
 \RequirePackage{xcolor}
 \RequirePackage[loadonly]{titlesec}
 %\RequirePackage{titlesec}
-\RequirePackage{titling}
+%\RequirePackage{titling}
 \RequirePackage{cabin}
 \setlength{\headheight}{28pt}
 \RequirePackage{fancyhdr}
@@ -144,8 +144,9 @@
 \LRCornerWallPaper{1.0}{SMR_01.pdf}
 
 % titlesec package specs for sections, subsections etc.
-% First the font:
+% First the fonts:
 \newcommand{\headingfont}{\cabincondensed}
+\newcommand{\titlefont}{\cabin}
 
 \titleclass{\section}[0]{straight}
 %\renewcommand{\thesubsection}{\arabic{section}}
@@ -197,24 +198,19 @@
   {}
 \titlespacing*{name=\subsubsection,numberless}{0pt}{*0.8}{*0.4}
 
-% Use hooks from the titling package to adjust the appearance of the
-% banner title
-
-\pretitle{\begin{center}\footnotesize xyz }
-\posttitle{\par\end{center}}
-%\renewcommand{\maketitlehooka}{\headingfont}
-
 \thispagestyle{empty}
 \pagestyle{fancy}
+
+% Make the abstract titling consistent with other headings
 \renewenvironment{abstract}{
+	\small
 	\begin{center}%
 		{\headingfont\abstractname\vspace{-.5em}}%
 	\end{center}
 	\quotation}
 	{\endquotation}
-
 %\thetitle gets corrupted on a new \section, so...
-\appendiargdef{\title}{\protected@xdef\@mydoctitle{\thetitle}}
+%\appendiargdef{\title}{\protected@xdef\@mydoctitle{\thetitle}}
 
 % Customise apperance of links
 \hypersetup{
@@ -227,13 +223,32 @@
 \date{}
 
 %\show\maketitle
-%\AtBeginDocument{
-%}
-% \par
-% \vspace*{0.5ex plus 0.3ex minus 0.2ex}
-% \begin{center}
-%  {\Huge\smr@title}\\[1.5ex plus 1ex minus 0.5ex]
-%  {\huge\smr@author, \smr@affiliation}
-% \end{center}
-% \vspace*{0.8ex plus 0.2ex minus 0.1ex}
-% }
+
+% The job of typesetting the main title is performed
+% by \@maketitle, called by \maketitle. The SMR class
+% needs to modify the default fonts, so it's best just
+% to copy the one inherited from the article class and
+% modify it here.
+%
+% This needs to happen after the document begins, hence
+% the use of the AtBeginDocument hook.
+\AtBeginDocument{
+\renewcommand\@maketitle{%
+  \newpage
+  \null
+  \vskip 2em%
+  \begin{center}%
+  \let \footnote \thanks
+    {\titlefont\LARGE Title: \@title \par}%
+    \vskip 1.5em%
+    {\titlefont\large
+     \lineskip .5em%
+     \begin{tabular}[t]{c}%
+       \@author
+     \end{tabular}\par}%
+    \vskip 1em%
+    {\titlefont\large \@date}%
+  \end{center}%
+  \par
+  \vskip 1.5em}
+}
