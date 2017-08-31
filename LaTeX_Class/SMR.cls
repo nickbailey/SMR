@@ -91,9 +91,6 @@
 % see http://mirrors.ctan.org/info/symbols/comprehensive/rawtables-a4.pdf
 \newcommand{\audioLink}[2][]{\screenOnly{\href{#2}{\faVolumeUp\ifx#1\empty\relax\else~#1\fi}}}
 \newcommand{\videoLink}[2][]{\screenOnly{\href{#2}{\faFilm\ifx#1\empty\relax\else~#1\fi}}}
-%\thetitle gets corrupted on a new \section, so...
-\appendiargdef{\title}{\protected@xdef\@mydoctitle{\thetitle}}
-
 
 
 %watermarks EDIT!!!!!
@@ -118,11 +115,11 @@
 
 \fancyhead{}\fancyfoot{}
 
-%author and institutional affiliation to use in the header
+% author and institutional affiliation to use in the header
 \newcommand{\smrtitle}[1]{\def\smr@title{#1}}
 \newcommand{\smrauthor}[1]{\def\smr@author{#1}}
 \newcommand{\smraffiliation}[1]{\def\smr@affiliation{#1}}
-%Remember the documents title (\thetitle might get overwritten)
+% Remember the document's title (\thetitle might get overwritten)
 \fancyhead[LE]{\raggedright%
   \quad\\
   \ifdefined\smr@title\else%
@@ -153,14 +150,14 @@
 \titleclass{\section}[0]{straight}
 %\renewcommand{\thesubsection}{\arabic{section}}
 \titleformat{\section}
-  {\headingfont\Large\bfseries}   % The style of the section title
+  {\headingfont\Large}           % The style of the section title
   {}                             % a prefix
   {0pt}                          % How much space exists between the prefix and the title
   {\makebox[1.2cm][l]{\thesection:}}            % How the section is represented
 \titlespacing*{\section}{0pt}{*1.5}{*0.4}
 % Starred variant
 \titleformat{name=\section,numberless}
-  {\headingfont\Large\bfseries}
+  {\headingfont\Large}
   {}
   {0pt}
   {}
@@ -169,7 +166,7 @@
 \titleclass{\subsection}{straight}[\section]
 %\renewcommand{\thesubsection}{\arabic{subsection}}
 \titleformat{\subsection}
-  {\headingfont\large\bfseries}   % The style of the section title
+  {\headingfont\large}           % The style of the section title
   {}                             % a prefix
   {0pt}                          % How much space exists between the prefix and the title
   {\makebox[1.2cm][l]{\thesubsection:}}    % How the section is represented
@@ -177,7 +174,7 @@
 \titlespacing*{\subsection}{0pt}{*0.8}{*0.4}
 % Starred variant
 \titleformat{name=\subsection,numberless}
-  {\headingfont\large\bfseries}
+  {\headingfont\large}
   {}
   {0pt}
   {}
@@ -186,7 +183,7 @@
 \titleclass{\subsubsection}{straight}[\section]
 %\renewcommand{\thesubsection}{\arabic{subsection}}
 \titleformat{\subsubsection}
-  {\headingfont\bfseries}   % The style of the section title
+  {\headingfont}                 % The style of the section title
   {}                             % a prefix
   {0pt}                          % How much space exists between the prefix and the title
   {\makebox[1.2cm][l]{\thesubsubsection:}}    % How the section is represented
@@ -194,7 +191,7 @@
 \titlespacing*{\subsubsection}{0pt}{*0.8}{*0.4}
 % Starred variant
 \titleformat{name=\subsubsection,numberless}
-  {\headingfont\bfseries}
+  {\headingfont}
   {}
   {0pt}
   {}
@@ -203,12 +200,21 @@
 % Use hooks from the titling package to adjust the appearance of the
 % banner title
 
-%\pretitle{xxx}
-%\posttitle{yyy}
-\renewcommand{\maketitlehooka}{\headingfont}
+\pretitle{\begin{center}\footnotesize xyz }
+\posttitle{\par\end{center}}
+%\renewcommand{\maketitlehooka}{\headingfont}
 
 \thispagestyle{empty}
 \pagestyle{fancy}
+\renewenvironment{abstract}{
+	\begin{center}%
+		{\headingfont\abstractname\vspace{-.5em}}%
+	\end{center}
+	\quotation}
+	{\endquotation}
+
+%\thetitle gets corrupted on a new \section, so...
+\appendiargdef{\title}{\protected@xdef\@mydoctitle{\thetitle}}
 
 % Customise apperance of links
 \hypersetup{
@@ -217,9 +223,10 @@
     citecolor={blue!50!black},
     urlcolor={blue!80!black}
 }
-
 % Don't put the date on the individual papers.
 \date{}
+
+%\show\maketitle
 %\AtBeginDocument{
 %}
 % \par
