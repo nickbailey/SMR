@@ -155,7 +155,7 @@ address = {Optional Publisher's Address},
 edition = {Optional  Edition},
 month = {Optional  Month},
 note = {Use \textbf{InCollection} for a Titled Chapter in a Book.
-            It's normally the one you want (rahter than inbook)},
+            It's normally the one you want (rather than \textbf{InBook})},
 annote = {Optional  Annotation},
 url = {Optional  URL},
 urldate = {Optional Date URL Created},
@@ -360,11 +360,10 @@ keywords = {Keyword1,Keyword2,Keyword3}
 
 %who and where
 \smrtitle{SMR.cls}
-\smrauthor{Nick and Marcin}
-\smraffiliation{Glasgow and Edinburgh Universities}
-
-\title{Scottish Music Review class file for XeLaTeX}
-\author{Bailey, Nick \and Pietryszwski, Marcin}
+\smrauthor{Bailey \& Milligan}
+\smraffiliation{SMRG, Glasgow}
+\title{Scottish Music Review class file for \XeLaTeX}
+\author{Bailey, Nick \and Milligan, Keziah}
 
 \begin{document}
 
@@ -376,15 +375,44 @@ keywords = {Keyword1,Keyword2,Keyword3}
 A class for the Scottish Music Review
 \end{abstract}
 
+\section{What's this?}
+
+It's not a LaTeX tutorial. To get started quickly, you might
+like to look at one of the introductions available on line,
+such as
+\href{http://tobi.oetiker.ch/lshort/lshort.pdf}{Oetiker \emph{et al}}
+or
+\href{http://talby.rcs.manchester.ac.uk/~rcs/_latex_doc_lib/docs/getting_started_with_latex/GSWLaTeX.pdf}{Wilkins}.
+
+\XeLaTeX{} is a variant of \LaTeX{} which makes it easier to use
+the wide variety of fonts often called for in a single document,
+especially one concerning music.
+
+\XeLaTeX{} is a \emph{typesetter}, and is nothing to do with the
+editor you use to compose the text of your paper. This leaves you to
+worry about the \emph{contents} of the paper, and leave the publishers
+to concern theselves with what the final version will look like.
+A half-decent publisher should be much better at that than we are.
+
+This means that the text you enter appears on the screen completely
+differently from how it appears on the page or the web. You can use
+any editor you like. You have to meet the software half way by giving
+it hints a your paper's structure, and take a little account of exactly
+what characters you mean to appear. After that, it's not your problem
+any more. Think of it as handing a manuscript to an engraver.
+
+The rest of this document assumes an elementary knowledge of \LaTeX.
+
+
 \section{Document Structure} %section title comes here,
 
-$\ldots$which you get by typing ``\cmd{section\{Section One\}}''
 The usual title, author and date commands given in the preamble
-are used to head up the paper, but there's also the smr- varients
+are used at the top of the paper, but there are also the smr- varients
 which get used in the headers. 
-If you don't supply them it'll still work, but you'll be warned.
+If you don't supply the smr- information, the paper will still be
+typeset, but warnings will ensue.
 
-If you supply an smrauthor, you \emph{must} supply an affiliation.
+If you supply an \cmd{smrauthor}, you \emph{must} supply an affiliation.
 
 The title is set at the top left of left-hand pages, and the
 author above the affiliation at the top right of right-hand pages.
@@ -394,11 +422,11 @@ the \cmd{begin\{document\}} I said
 
 \begin{verbatim}
 \smrtitle{SMR.cls}
-\smrauthor{Marcin and Nick}
-\smraffiliation{Edinburgh and Glasgow Universities}
+\smrauthor{Bailey \& Milligan}
+\smraffiliation{SMRG Glasgow}
 
 \title{Scottish Music Review class file for XeLaTeX}
-\author{Bailey, Nick \and Pietryszwski, Marcin}
+\author{Bailey, Nick \and Milligan, Keziah}
 \end{verbatim}
 
 \subsection{A Subsection} %subsections
@@ -410,16 +438,25 @@ Subsections are numbered per section. This one was obtained by saying
 \subsubsection{Italics and Emphasis}
 Introduce emphasis like this: \cmd{emph\{Important\}}.
 \emph{Important}: emphasis is a matter of house style.
-We decide what it means. \underline{Avoid} using \cmd{underline\{\}}
+We decide what it looks like; at the moment we use italics.
+\underline{Avoid} using \cmd{underline\{\}}
 unless there's a pressing technical meaining to the symbol.
 
-\subsubsection{Quotataion marks, hyphens and dashes}
-Only use single quotes, and type two in order to get double ones. So
+\subsubsection{Quotation marks, hyphens and dashes}
+We mostly prefer single quotes at the outer level, with
+double quotes for nested quotations. But we don't have an
+axe to grind as long as there is consisntency across the
+paperp
+
+Whichever sort of quotation mark you want, type it using
+only use single quotes. This means there will also be no
+ambiguity as to whether open or close quotes are required.
+Type two single quotes in order to get double ones. So
 \verb!` - `` - ''-'! gives you ` - `` - ''-'. Mutiple dashes
 give access to the different dashes use in properly-typeset documents
 (that was one dash): 80--90\% (two) of people don't understand that
 --- (three) why should they? The typesetter used to have to worry about that
-in the old days.
+in the olden days, but we are all computer experts now.
 
 \subsubsection{Notes}
 Footnotes\footnote{They break the flow and don't really
@@ -519,15 +556,19 @@ To get it I said
 \caption{An included photograph.}
 \label{f:graphicexample} % Not before the caption!
 \centering
-\includegraphics[width=0.5\textwidth]{klein.jpg}
+\includegraphics[width=0.5\textwidth]{leaves.jpg}
 \end{figure}
 \end{verbatim}
 
 In particular, \emph{do not} use any raster format for musical score.
+There will be dreadful aliasing artefacts.
 None of them play nice with the long horizontal lines on the staves
-(because of science). Use Lilypond, or make a PDF and use that instead.
+and you will end up with barely readable scores
+(because of science). Use Lilypond, or make a PDF containing
+vector graphics and use that instead.
 
-This example illustrated the optional argument in the sqaure brackets.
+This example illustrated above has an optional argument
+contained within sqaure brackets (\cmd{begin\{figure\}[h]}).
 \texttt{h} means ``please think about putting the figure right here''.
 The default for figures and tables is \texttt{htbf} (here, then top of the page,
 then bottom of the page, then on a page by itself, in order of preference).
@@ -733,7 +774,7 @@ use \cmd{cite}, for example:
 \cite{1965smith_numerical_solution} liked PDEs.
 \end{verbatim}
 
-You can put text before and after the main citation inside the
+You can put text before and after the main citation inside option
 brackets: this is use for adding page references following the year:
 \begin{verbatim}
 PDEs can be fun~\citep[Some chap called ][at the end]{1965smith_numerical_solution}.
@@ -743,7 +784,7 @@ PDEs can be fun~\citep[Some chap called][at the end]{1965smith_numerical_solutio
 
 If you use a \LaTeX-aware editor (Kile, Texstudio etc) it's very likely you can
 configure it to do all the above at a single click of the mouse,
-but there are too many such applications to consider them all here.
+but there are too many such applications to consider them all here. RTFM.
 
 You can click the link to jump to the entry, and the ``Cited on page...''
 information page lets you navigate back easily. See Section~\ref{s:bibtypes}
@@ -1108,7 +1149,8 @@ Comprehesive \LaTeX{} Symbol List}.
 
 Links to audio and video files can be accommodated in a way which produces
 a clickable icon when read on-line, but which becomes invisible when
-printed. The following utility command is provided:
+printed (at least, on a standard-conforming client).
+The following utility command is provided:
 \cmd{screenOnly\{This won't print\}}.
 
 Multimedia files are specified by their URL, and can be linked to the
@@ -1131,7 +1173,8 @@ an http protocol. Using relative URIs currently appears to produce
 different behaviour depending on the combination of the reader's
 platform, browser, and installed media rendering libraries
 (as of September~2016). We prefer to store both audio and video
-media in \texttt{webm} containers.
+media in \texttt{webm} containers. HTML5-complient web browsers are
+required to support them.
 
 \section{Bibliographic Entry Types}
 \label{s:bibtypes}

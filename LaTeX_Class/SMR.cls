@@ -52,11 +52,14 @@
 %\RequirePackage[utf8]{inputenc}
 \RequirePackage{xcolor}
 \RequirePackage[loadonly]{titlesec}
+%\RequirePackage{titlesec}
+\RequirePackage{titling}
+\RequirePackage{cabin}
 \setlength{\headheight}{28pt}
 \RequirePackage{fancyhdr}
 \RequirePackage{fontspec}
 \RequirePackage{lilyglyphs}
-\RequirePackage{titling}
+
 %
 % Bibliography and citation styles
 \RequirePackage[round,merge,sort&compress]{natbib}
@@ -143,18 +146,21 @@
 %bottom graphic to appear on all pages
 \LRCornerWallPaper{1.0}{SMR_01.pdf}
 
+% titlesec package specs for sections, subsections etc.
+% First the font:
+\newcommand{\headingfont}{\cabincondensed}
 
 \titleclass{\section}[0]{straight}
 %\renewcommand{\thesubsection}{\arabic{section}}
 \titleformat{\section}
-  {\normalfont\Large\bfseries}   % The style of the section title
+  {\headingfont\Large\bfseries}   % The style of the section title
   {}                             % a prefix
   {0pt}                          % How much space exists between the prefix and the title
   {\makebox[1.2cm][l]{\thesection:}}            % How the section is represented
 \titlespacing*{\section}{0pt}{*1.5}{*0.4}
 % Starred variant
 \titleformat{name=\section,numberless}
-  {\normalfont\Large\bfseries}
+  {\headingfont\Large\bfseries}
   {}
   {0pt}
   {}
@@ -163,7 +169,7 @@
 \titleclass{\subsection}{straight}[\section]
 %\renewcommand{\thesubsection}{\arabic{subsection}}
 \titleformat{\subsection}
-  {\normalfont\large\bfseries}   % The style of the section title
+  {\headingfont\large\bfseries}   % The style of the section title
   {}                             % a prefix
   {0pt}                          % How much space exists between the prefix and the title
   {\makebox[1.2cm][l]{\thesubsection:}}    % How the section is represented
@@ -171,7 +177,7 @@
 \titlespacing*{\subsection}{0pt}{*0.8}{*0.4}
 % Starred variant
 \titleformat{name=\subsection,numberless}
-  {\normalfont\large\bfseries}
+  {\headingfont\large\bfseries}
   {}
   {0pt}
   {}
@@ -180,7 +186,7 @@
 \titleclass{\subsubsection}{straight}[\section]
 %\renewcommand{\thesubsection}{\arabic{subsection}}
 \titleformat{\subsubsection}
-  {\normalfont\bfseries}   % The style of the section title
+  {\headingfont\bfseries}   % The style of the section title
   {}                             % a prefix
   {0pt}                          % How much space exists between the prefix and the title
   {\makebox[1.2cm][l]{\thesubsubsection:}}    % How the section is represented
@@ -188,11 +194,18 @@
 \titlespacing*{\subsubsection}{0pt}{*0.8}{*0.4}
 % Starred variant
 \titleformat{name=\subsubsection,numberless}
-  {\normalfont\bfseries}
+  {\headingfont\bfseries}
   {}
   {0pt}
   {}
 \titlespacing*{name=\subsubsection,numberless}{0pt}{*0.8}{*0.4}
+
+% Use hooks from the titling package to adjust the appearance of the
+% banner title
+
+%\pretitle{xxx}
+%\posttitle{yyy}
+\renewcommand{\maketitlehooka}{\headingfont}
 
 \thispagestyle{empty}
 \pagestyle{fancy}
