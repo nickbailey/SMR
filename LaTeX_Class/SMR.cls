@@ -1,7 +1,7 @@
 % SMR.cls
 %  LaTeX 2e class for the Scottish Music Review
 
-\ProvidesClass{SMR}[2016/06/06 version 1.01 Scottish Music Review]
+\ProvidesClass{SMR}[2016/06/06 version 1.02 Scottish Music Review]
 \NeedsTeXFormat{LaTeX2e}
 
 % Replace the proprietary Adobe InDesign template used to typeset
@@ -52,8 +52,7 @@
 %\RequirePackage[utf8]{inputenc}
 \RequirePackage{xcolor}
 \RequirePackage[loadonly]{titlesec}
-%\RequirePackage{titlesec}
-%\RequirePackage{titling}
+\RequirePackage{titling}
 \RequirePackage{cabin}
 \setlength{\headheight}{28pt}
 \RequirePackage{fancyhdr}
@@ -209,8 +208,9 @@
 	\end{center}
 	\quotation}
 	{\endquotation}
+
 %\thetitle gets corrupted on a new \section, so...
-%\appendiargdef{\title}{\protected@xdef\@mydoctitle{\thetitle}}
+\appendiargdef{\title}{\protected@xdef\@mydoctitle{\thetitle}}
 
 % Customise apperance of links
 \hypersetup{
@@ -239,7 +239,7 @@
   \vskip 2em%
   \begin{center}%
   \let \footnote \thanks
-    {\titlefont\LARGE Title: \@title \par}%
+    {\titlefont\LARGE\@title\par}%
     \vskip 1.5em%
     {\titlefont\large
      \lineskip .5em%

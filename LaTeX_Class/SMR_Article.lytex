@@ -359,10 +359,10 @@ keywords = {Keyword1,Keyword2,Keyword3}
 \graphicspath{ {/Where/you/keep/your/graphics} }  % <- UPDATE THE PATH
 
 %who and where
-\smrtitle{SMR.cls}
+\smrtitle{SMR class for \XeLaTeX}
 \smrauthor{Bailey \& Milligan}
 \smraffiliation{SMRG, Glasgow}
-\title{Scottish Music Review class file for \textrm{\XeLaTeX}}
+\title{Scottish Music Review class file for \textrm{\bfseries \XeLaTeX}}
 \author{Bailey, Nick \and Milligan, Keziah}
 
 \begin{document}
