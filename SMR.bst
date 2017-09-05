@@ -493,7 +493,6 @@ FUNCTION {format.names}
           namesleft #1 >
             { ", " * t * }
             {
-              "," *
               s nameptr "{ll}" format.name$ duplicate$ "others" =
                 { 't := }
                 { pop$ }
