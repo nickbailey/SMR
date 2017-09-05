@@ -87,7 +87,7 @@ issn = {ISSN Number},
 localfile = {The Local File},
 abstract = {Abstract Text},
 keywords = {Keyword1, Keyword2},
-translator = {The Translator}
+translator = {Optional Book Translator}
 }
 @Booklet{booklet,
  title = {The Title},
