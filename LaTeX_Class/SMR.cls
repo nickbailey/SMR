@@ -1,7 +1,7 @@
 % SMR.cls
 %  LaTeX 2e class for the Scottish Music Review
 
-\ProvidesClass{SMR}[2016/06/06 version 1.02 Scottish Music Review]
+\ProvidesClass{SMR}[2016/06/06 version 1.03 Scottish Music Review]
 \NeedsTeXFormat{LaTeX2e}
 
 % Replace the proprietary Adobe InDesign template used to typeset
@@ -161,7 +161,7 @@
   {}
   {0pt}
   {}
-\titlespacing*{name=\section,numberless}{0pt}{*1.0}{*0.4}
+\titlespacing*{name=\section,numberless}{0pt}{*1.6}{*0.5}
 
 \titleclass{\subsection}{straight}[\section]
 %\renewcommand{\thesubsection}{\arabic{subsection}}
