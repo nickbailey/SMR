@@ -1394,8 +1394,10 @@ FUNCTION {newspaperarticle}
       format.edition output
       format.np.vol.num.pages output
       new.sentence
-      format.number.series output
-      format.publisher.address output
+      publisher empty$
+	{ }
+	{ format.publisher.address output }
+      if$
     }
     { new.block
       format.incoll.inproc.crossref output.nonnull
