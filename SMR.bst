@@ -1274,6 +1274,10 @@ FUNCTION {incollection}
   author format.key output
   name.or.dash
   format.date "year" output.check
+  translator missing$
+    'skip$
+    { format.translators "translator" output.check }
+  if$
   date.block
   format.title enquote "title" output.check
   crossref missing$
