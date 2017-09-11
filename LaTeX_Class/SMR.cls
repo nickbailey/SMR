@@ -1,7 +1,7 @@
 % SMR.cls
 %  LaTeX 2e class for the Scottish Music Review
 
-\ProvidesClass{SMR}[2016/06/06 version 1.03 Scottish Music Review]
+\ProvidesClass{SMR}[2016/06/06 version 1.04 Scottish Music Review]
 \NeedsTeXFormat{LaTeX2e}
 
 % Replace the proprietary Adobe InDesign template used to typeset

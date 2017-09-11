@@ -254,7 +254,6 @@ localfile = {Optional Local File},
 abstract = {Optional Abstract Text},
 keywords = {Keyword1,Keyword2,Keyword3}
 }
-
 @NewspaperArticle{newspaper,
 author = {Author, First},
 title = {The Title},
@@ -1243,22 +1242,26 @@ of all the entry types supported
 by the SMR bibliographic style. The fields contain capitalised words
 mid-sentence to demonstrate the behaviour with respect to case
 alteration.
-Historically, the normal behaviour for the title field is that
+Historically, the normal behaviour for the \texttt{title} field is that
 it is converted to lower case except for the first character, which
-is capitalised. We have retained this behaviour as it is so
+is capitalised. We have retained this default as it is so
 universally adopted elsewhere. To retain the capitalisation
 typed in the \texttt{.bib} file, enclose the text in \{\};
 it will then not be modified.
 
+\subsection{Changes from the Default Style}
 We have added an optional \texttt{translator} field to the
-\textbf{Book} and \textbf{InBook} types. It is very rare that
-it is appropriate to use the \textbf{InBook} type, however:
+\textbf{Book} and \textbf{InBook} types. It is
+rarely appropriate to use the \textbf{InBook} type, however:
 see the annotation in the bibliography for details.
 
-Note that some types have mutual exclusivity for some fields. Usually,
-either Author or Editor are to be supplied but not both. It is also
-not usually allowed to specify both the volume and number.
+Note that some types have mutual exclusivity for some fields,
+which we retain. Usually, either an author or editor
+are to be supplied but not both. It is also sometimes
+not allowed to specify both the volume and number. Again,
+refer to the bibliographic examples at the end of the document.
 
+\subsection{Commercially Released Recordings}
 To support the citation of commercially released recordings, we have
 made available the new \textbf{Recording} type. The \texttt{author}
 field should be used for the composer in the case of classical
@@ -1286,6 +1289,50 @@ following:
   publisher = {Optional Publisher},
   address = {Optional Publisher's Address},
   note = {Use \textbf{Recording} to Cite a Commercially Released Recording.}
+}
+\end{verbatim}
+
+\subsection{Articles in a Newspaper}
+We provide a \textbf{NewspaperArticle} type to permit the easy
+citation of articles in a newspaper. Newspapers are the only
+citation which requires a (numerical) date of publication,
+so \texttt{year}, \texttt{month} and \texttt{day} are all
+required fields. \texttt{author}, \texttt{title} and \texttt{newspaper}
+are the only other fields which will normally be required to
+cite a newspaper article, maybe with the helpful with the addition of
+\texttt{pages}.
+
+\begin{verbatim}
+@NewspaperArticle{newspaper,
+  author = {Author, First},
+  title = {The Title},
+  newspaper = {The Newspaper},
+  year = {Year},
+  month = {Month},
+  day = {Day},
+  key = {Optional Key},
+  pages = {Optional Page -- End Page},
+  publisher = {Optional Publisher},
+  editor = {Optional Editor},
+  volume = {Optional Volume},
+  number = {Optional Number},
+  type = {Optional Type of Chapter},
+  chapter = {Optional Numeric Chapter},
+  address = {Optional Publisher's Address},
+  edition = {Optional Edition},
+  note = {Use \textbf{NewspaperArticle} for an article printed in a newspaper.
+          Since it's a newspaper, \texttt{month} and \texttt{day} must be given
+          as well as \texttt{year}.},
+  annote = {Optional  Annotation},
+  url = {Optional  URL},
+  urldate = {Optional Date URL Created},
+  lastchecked = {Optional Date URL was Last Checked},
+  doi = {Optional DOI Number},
+  isbn = {Optional ISBN Number},
+  issn = {Optional ISSN Number},
+  localfile = {Optional  Local File},
+  abstract = {Optional Abstract Text},
+  keywords = {Keyword1,Keyword2,Keyword3}
 }
 \end{verbatim}
 
