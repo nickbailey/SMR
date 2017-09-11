@@ -70,6 +70,7 @@ ENTRY
     chapter
     composer
     conductor
+    day
     edition
     editor
     eprint
@@ -79,6 +80,7 @@ ENTRY
     key
     medium
     month
+    newspaper
     note
     number
     organization
@@ -961,6 +963,26 @@ FUNCTION {format.vol.num.pages}
   format.journal.pages
 }
 
+FUNCTION {format.np.vol.num.pages}
+{ volume field.or.null
+  duplicate$ empty$ 'skip$
+    {
+      "volume" bibinfo.check
+    }
+  if$
+  number "number" bibinfo.check duplicate$ empty$ 'skip$
+    {
+      swap$ duplicate$ empty$
+        { "there's a number but no volume in " cite$ * warning$ }
+        'skip$
+      if$
+      swap$
+      "/" swap$ *
+    }
+  if$ *
+  format.journal.pages
+}
+
 FUNCTION {format.chapter.pages}
 { chapter empty$
     'format.pages
@@ -1002,6 +1024,30 @@ FUNCTION {format.in.ed.booktitle}
     }
   if$
 }
+
+FUNCTION {format.newspaperdate}
+{
+  day
+  duplicate$ empty$
+    { "Day of publication is required for a newspaper article" warning$ }
+    { }
+  if$
+  month
+  duplicate$ empty$
+    { "Month of publication is required for a newspaper article" warning$ }
+    { }
+  if$
+  "~" * swap$ *
+}
+
+FUNCTION {format.newspapertitle}
+{ newspaper
+  duplicate$ empty$ 'skip$
+    { "t" change.case$ }
+  if$
+  "title" bibinfo.check
+}
+
 FUNCTION {format.thesis.type}
 { type duplicate$ empty$
     'pop$
@@ -1333,6 +1379,36 @@ FUNCTION {misc}
   format.eprint output
   fin.entry
 }
+
+FUNCTION {newspaperarticle}
+{ output.bibitem
+  format.authors "author" output.check
+  author format.key output
+  name.or.dash
+  format.date "year" output.check
+  date.block
+  format.title enquote "title" output.check
+  crossref missing$
+    { format.newspapertitle emphasize "newspaper" output.check
+      format.newspaperdate output
+      format.edition output
+      format.np.vol.num.pages output
+      new.sentence
+      format.number.series output
+      format.publisher.address output
+    }
+    { new.block
+      format.incoll.inproc.crossref output.nonnull
+      format.chapter.pages output
+    }
+  if$
+  new.block
+  format.note output
+  format.eprint output
+  fin.entry
+}
+
+
 FUNCTION {phdthesis}
 { output.bibitem
   format.authors "author" output.check

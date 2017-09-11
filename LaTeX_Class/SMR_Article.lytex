@@ -254,6 +254,38 @@ localfile = {Optional Local File},
 abstract = {Optional Abstract Text},
 keywords = {Keyword1,Keyword2,Keyword3}
 }
+
+@NewspaperArticle{newspaper,
+author = {Author, First},
+title = {The Title},
+newspaper = {The Newspaper},
+key = {Optional Key},
+pages = {Optional Page -- End Page},
+publisher = {Optional Publisher},
+year = {Year},
+month = {Month},
+day = {Day},
+editor = {Optional Editor},
+volume = {Optional Volume},
+number = {Optional Number},
+type = {Optional Type of Chapter},
+chapter = {Optional Numeric Chapter},
+address = {Optional Publisher's Address},
+edition = {Optional Edition},
+note = {Use \textbf{NewspaperArticle} for an article printed in a newspaper.
+        Since it's a newspaper, \texttt{month} and \texttt{day} must be given
+        as well as \texttt{year}.},
+annote = {Optional  Annotation},
+url = {Optional  URL},
+urldate = {Optional Date URL Created},
+lastchecked = {Optional Date URL was Last Checked},
+doi = {Optional DOI Number},
+isbn = {Optional ISBN Number},
+issn = {Optional ISSN Number},
+localfile = {Optional  Local File},
+abstract = {Optional Abstract Text},
+keywords = {Keyword1,Keyword2,Keyword3}
+}
 @PhdThesis{phdthesis,
  author = {Author, First and Author, Second and Author, Third},
  title = {The Title},
@@ -1257,7 +1289,7 @@ following:
 }
 \end{verbatim}
 
-\nocite{article,book,booklet,inbook,incollection,inproceedings,manual,mastersthesis,misc,phdthesis,proceedings,recording,techreport,unpublished}
+\nocite{article,book,booklet,inbook,incollection,inproceedings,manual,mastersthesis,misc,newspaper,phdthesis,proceedings,recording,techreport,unpublished}
 
 \bibliography{smr}
 
