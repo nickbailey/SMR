@@ -497,7 +497,7 @@ Subsections are numbered per section. This one was obtained by saying
 \subsubsection{Italics and Emphasis}
 Introduce emphasis like this: \cmd{emph\{Important\}}.
 \emph{Important}: emphasis is a matter of house style.
-We decide what it looks like; at the moment we use italics.
+They decide what it looks like; at the moment they use italics.
 \underline{Avoid} using \cmd{underline\{\}}
 unless there's a pressing technical meaining to the symbol.
 
@@ -505,11 +505,11 @@ unless there's a pressing technical meaining to the symbol.
 We mostly prefer single quotes at the outer level, with
 double quotes for nested quotations. But we don't have an
 axe to grind as long as there is consistency throughout the
-paper
+paper.
 
 Whichever sort of quotation mark you want, type it using
 only use single quotes. This means there will also be no
-ambiguity as to whether open or close quotes are required.
+ambiguity as to whether open or close quotes are meant.
 Type two single quotes in order to get double ones. So
 \verb!` - `` - ''-'! gives you ` - `` - ''-'. Mutiple dashes
 give access to the different dashes use in properly-typeset documents
@@ -597,7 +597,7 @@ are used, load the package like this:
 
 In \LaTeX, figures ``float'' (i.e. get placed where they look right).
 It's best to use PDF files or PNG files, reserving JPEG files
-for when there are actual photos. Otherewise there will be nasty artefacts.
+for when there are actual photos. Otherwise there will be nasty artefacts.
 
 Here is some text to be formatted followed by a 
 photograph of a tree as an example of how graphics are formatted
@@ -620,13 +620,12 @@ To get it I said
 \end{verbatim}
 
 In particular, \emph{do not} use any raster format for musical score.
-There will be dreadful aliasing artefacts.
 None of them play nice with the long horizontal lines on the staves
 and you will end up with barely readable scores
 (because of science). Use Lilypond, or make a PDF containing
 vector graphics and use that instead.
 
-This example illustrated above has an optional argument
+The example illustration in the text above has an optional argument
 contained within sqaure brackets (\cmd{begin\{figure\}[h]}).
 \texttt{h} means ``please think about putting the figure right here''.
 The default for figures and tables is \texttt{htbf} (here, then top of the page,
@@ -818,10 +817,10 @@ the preferred form of citation can be obtained using \cmd{citep}
 PDEs can be fun~\citep{1965smith_numerical_solution}.
 \end{verbatim}
 
-PDEs can be fun~\citep{1965smith_numerical_solution}.
-
 and saying \cmd{bibliography\{your\_bib\_file\}} at the place where
 the bibliography should appear.
+
+\framebox{PDEs can be fun~\citep{1965smith_numerical_solution}.}
 
 % I'm going to cheat shamelessly because I can't be bothered to do
 % multiple bibliography entries per article
@@ -1054,8 +1053,7 @@ After saying \cmd{usepackage$\{$parallel$\}$} at the top of your document,
 these can be achieved as follows:
 
 \begin{verbatim}
- \begin{parallel}
-  [<environment_options>]{<left-width>}{<right-width>}
+\begin{parallel}[<environment_options>]{<left-width>}{<right-width>}
 \ParallelLText{<left-text>}
 \ParallelRText{<right-text>}
 \ParallelPar
