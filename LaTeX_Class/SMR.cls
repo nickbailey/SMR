@@ -9,7 +9,6 @@
 % the PoMS).
 %
 
-\PassOptionsToClass{a4paper,twoside}{article}
 % The default point size option for SMR is 11.5pt (why??)
 % We'll allow other point sizes through class options.
 \def\@@ptsize{11.5pt}
@@ -21,10 +20,11 @@
 \DeclareOption{nodecals}{\@decalsfalse}
 % Choose a base package
 \def\@@base@package{article}
-\DeclareOption{book}{\def\@@base@package{book}}
+\DeclareOption{book}{\def\@@base@package{book}\def\@@book@mode{}}
+\PassOptionsToClass{a4paper,twoside}{\@@base@package}
 % For each option in the article, try to load option.smr.
 % If that file doesn't exist, pass the current option to
-% article which is the our default base clase.
+% which is the our default base clase.
 \DeclareOption*{\InputIfFileExists{\CurrentOption.smr}{}{%
 \PassOptionsToClass{\CurrentOption}{\@@base@package}}}
 
@@ -33,7 +33,7 @@
 
 
 % Invoke the base class
-\LoadClass{article}
+\LoadClass{\@@base@package}
 
 
 
@@ -148,7 +148,7 @@
   \ifdefined\smr@author\else%
     \message{LaTeX Warning: No \noexpand\smrauthor. Working around. Use \noexpand\smrauthor
              and \noexpand\smraffiliation to supress this message.}%
-    \def\smr@author{\relax}\def\smr@affiliation{\theauthor}\fi
+    \def\smr@author{}\def\smr@affiliation{\theauthor}\fi
   \textbf{\smr@author\\
     \smr@affiliation}%
 }
@@ -216,13 +216,17 @@
 \pagestyle{fancy}
 
 % Make the abstract titling consistent with other headings
-\renewenvironment{abstract}{
-	\small
-	\begin{center}%
-		{\headingfont\abstractname\vspace{-.5em}}%
-	\end{center}
-	\quotation}
-	{\endquotation}
+
+% Articles have abstracts, books don't
+\ifdefined\@@book@mode\else{
+        \renewenvironment{abstract}{
+                \small
+                \begin{center}%
+                        {\headingfont\abstractname\vspace{-.5em}}%
+                \end{center}
+                \quotation}
+                {\endquotation}}
+\fi
 
 %\thetitle gets corrupted on a new \section, so...
 \appendiargdef{\title}{\protected@xdef\@mydoctitle{\thetitle}}
@@ -245,8 +249,12 @@
 % to copy the one inherited from the article class and
 % modify it here.
 %
+% Books should have custom title pages, and don't
+% supply \@maketitle, so the only applies to articles.
+%
 % This needs to happen after the document begins, hence
 % the use of the AtBeginDocument hook.
+\ifdefined\@@book@mode\else{
 \AtBeginDocument{
 \renewcommand\@maketitle{%
   \newpage
@@ -266,4 +274,4 @@
   \end{center}%
   \par
   \vskip 1.5em}
-}
+}}\fi
