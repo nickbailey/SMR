@@ -1,16 +1,13 @@
 % SMR.cls
 %  LaTeX 2e class for the Scottish Music Review
 
-\ProvidesClass{SMR}[2016/06/06 version 1.04 Scottish Music Review]
+\ProvidesClass{SMR}[2021/04/01 version 2.01 Scottish Music Review]
 \NeedsTeXFormat{LaTeX2e}
 
 % Replace the proprietary Adobe InDesign template used to typeset
 % the Scottish Music Review (which in any case has been lost by
 % the PoMS).
 %
-
-%%% EDIT to set the volume displayed near the PDF footer.
-\def\smr@volume{Volume 4 (2016)}
 
 \PassOptionsToClass{a4paper,twoside}{article}
 % The default point size option for SMR is 11.5pt (why??)
@@ -19,11 +16,17 @@
 \DeclareOption{10pt}{\def\@@ptsize{10pt}}
 \DeclareOption{11pt}{\def\@@ptsize{11pt}}
 \DeclareOption{12pt}{\def\@@ptsize{12pt}}
+% Sometimes we don't want decorations
+\newif\if@decals\@decalstrue
+\DeclareOption{nodecals}{\@decalsfalse}
+% Choose a base package
+\def\@@base@package{article}
+\DeclareOption{book}{\def\@@base@package{book}}
 % For each option in the article, try to load option.smr.
 % If that file doesn't exist, pass the current option to
 % article which is the our default base clase.
 \DeclareOption*{\InputIfFileExists{\CurrentOption.smr}{}{%
-\PassOptionsToClass{\CurrentOption}{article}}}
+\PassOptionsToClass{\CurrentOption}{\@@base@package}}}
 
 % That's the end of the options section
 \ProcessOptions \relax
@@ -31,6 +34,8 @@
 
 % Invoke the base class
 \LoadClass{article}
+
+
 
 % font setup WE CAN FIND NICER LOOKING ONE
 \RequirePackage{concrete}
@@ -45,8 +50,6 @@
  top = 3.5cm,
  hmarginratio=1:1]{geometry}
 \RequirePackage{graphicx} 
-\RequirePackage[printwatermark]{xwatermark}
-\RequirePackage{wallpaper}
 \RequirePackage{ifthen}
 %\RequirePackage[T1]{fontenc}
 %\RequirePackage[utf8]{inputenc}
@@ -91,26 +94,41 @@
 \newcommand{\audioLink}[2][]{\screenOnly{\href{#2}{\faVolumeUp\ifx#1\empty\relax\else~#1\fi}}}
 \newcommand{\videoLink}[2][]{\screenOnly{\href{#2}{\faFilm\ifx#1\empty\relax\else~#1\fi}}}
 
-
 %watermarks EDIT!!!!!
-\newwatermark[%
-  allpages,% show on all pages
-  fontfamily=arialbold,% use Bookman font family
-  angle=0,% rotate by 55 degrees
-  scale=0.3,% scale by 2.75
-  xpos= -7.5cm,% shift by 1cm to the left
-  ypos= -14.3cm% shift up by 1cm
-]{Scottish Music Review} %provide volume and year here 
+%%% EDIT to set the volume displayed near the PDF footer.
+\def\smr@volume{Volume 4 (2016)}
 
+\if@decals
 
-\newwatermark[%
-  allpages,% show on all pages
-  fontfamily=arialbold,% use Bookman font family
-  angle=0,% rotate by 55 degrees
-  scale=0.3,% scale by 2.75
-  xpos= 8.5cm,% shift by 1cm to the left
-  ypos= -14.4cm% shift up by 1cm
-]{\smr@volume} %provide volume and year here <- EDIT HERE!!!!!!
+        \RequirePackage[printwatermark]{xwatermark}
+        \RequirePackage{wallpaper}
+
+        \newwatermark[%
+        allpages,% show on all pages
+        fontfamily=arialbold,% use Bookman font family
+        angle=0,% rotate by 55 degrees
+        scale=0.3,% scale by 2.75
+        xpos= -7.5cm,% shift by 1cm to the left
+        ypos= -14.3cm% shift up by 1cm
+        ]{Scottish Music Review} %provide volume and year here 
+
+        \newwatermark[%
+        allpages,% show on all pages
+        fontfamily=arialbold,% use Bookman font family
+        angle=0,% rotate by 55 degrees
+        scale=0.3,% scale by 2.75
+        xpos= 8.5cm,% shift by 1cm to the left
+        ypos= -14.4cm% shift up by 1cm
+        ]{\smr@volume} %provide volume and year here <- EDIT HERE!!!!!!
+
+        %logo of SMR to appear on first page only
+        \ThisLRCornerWallPaper{1.0}{SMR_00.pdf} 
+
+        %bottom graphic to appear on all pages
+        \LRCornerWallPaper{1.0}{SMR_01.pdf}
+
+\fi
+
 
 \fancyhead{}\fancyfoot{}
 
@@ -130,22 +148,19 @@
   \ifdefined\smr@author\else%
     \message{LaTeX Warning: No \noexpand\smrauthor. Working around. Use \noexpand\smrauthor
              and \noexpand\smraffiliation to supress this message.}%
-    \def\smr@author{}\def\smr@affiliation{\theauthor}\fi
+    \def\smr@author{\relax}\def\smr@affiliation{\theauthor}\fi
   \textbf{\smr@author\\
     \smr@affiliation}%
 }
 \fancyfoot[LE,RO]{\thepage}
 
-%logo of SMR to appear on first page only
-\ThisLRCornerWallPaper{1.0}{SMR_00.pdf} 
-
-%bottom graphic to appear on all pages
-\LRCornerWallPaper{1.0}{SMR_01.pdf}
-
 % titlesec package specs for sections, subsections etc.
 % First the fonts:
 \newcommand{\headingfont}{\cabincondensed}
 \newcommand{\titlefont}{\cabin}
+
+
+
 
 \titleclass{\section}[0]{straight}
 %\renewcommand{\thesubsection}{\arabic{section}}
