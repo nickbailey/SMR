@@ -36,7 +36,6 @@
 \LoadClass{\@@base@package}
 
 
-
 % font setup WE CAN FIND NICER LOOKING ONE
 \RequirePackage{concrete}
 
@@ -54,7 +53,13 @@
 %\RequirePackage[T1]{fontenc}
 %\RequirePackage[utf8]{inputenc}
 \RequirePackage{xcolor}
-\RequirePackage[loadonly]{titlesec}
+% SMR articles have custom titles; books use the defaults.
+\ifdefined\@@book@mode
+        \def\titlesec@opts{}
+\else
+        \def\titlesec@opts{loadonly}
+\fi
+\RequirePackage[\titlesec@opts]{titlesec}
 \RequirePackage{titling}
 \RequirePackage{cabin}
 \setlength{\headheight}{28pt}
@@ -160,7 +165,9 @@
 \newcommand{\titlefont}{\cabin}
 
 
+\if\@@book@mode
 
+\else
 
 \titleclass{\section}[0]{straight}
 %\renewcommand{\thesubsection}{\arabic{section}}
@@ -211,6 +218,8 @@
   {0pt}
   {}
 \titlespacing*{name=\subsubsection,numberless}{0pt}{*0.8}{*0.4}
+
+\fi
 
 \thispagestyle{empty}
 \pagestyle{fancy}
