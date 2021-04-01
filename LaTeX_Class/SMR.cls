@@ -165,8 +165,8 @@
 \newcommand{\titlefont}{\cabin}
 
 
-\if\@@book@mode
-
+\ifdefined\@@book@mode
+% Book mode appearance will be defined here when I get a round tuit.
 \else
 
 \titleclass{\section}[0]{straight}

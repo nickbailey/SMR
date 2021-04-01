@@ -1,4 +1,4 @@
-\documentclass{SMR}
+\documentclass[nodecals]{SMR}
 
 %
 % This file uses lilypond inclusions.
@@ -29,7 +29,8 @@
 \setotherlanguage{hebrew}
 % Workaround bug in Bidi package
 %\makeatletter\@Latintrue\makeatother
-\newfontfamily\hebrewfont[Script=Hebrew]{David CLM}
+%\newfontfamily\hebrewfont[Script=Hebrew]{David CLM}
+\newfontfamily\hebrewfont[Script=Hebrew]{Taamey Ashkenaz}
 \setotherlanguage{greek}
 \newfontfamily\greekfont[Script=Greek,Ligatures=TeX]{Linux Libertine O} % Has Greek characters
 \setmainlanguage{english}
@@ -529,15 +530,18 @@ you format them as endnotes either by putting
 in the preamble, or simply using \cmd{endnote\{text\}}\endnote{This is an
 example endnote.} Occasionally, it's necessary to typeset two notes
 at the same place. The \texttt{fnpct} package is the way to do this;
-the notes can be introduced with \cmd{multendnote\{multendnote takes
-a semicolon-separated list of notes;multendnote only takes a single
-argument\}}.\multendnote{multendnote takes
-a semicolon-separated list of notes;multendnote only takes a single
-argument}
+the notes may simply immediately follow eachother and this package
+concatenates them for you.
+\cmd{endnote\{endnote takes a single argument\}}\cmd{endnote\{This endnote follows
+immediately\}}
+\endnote{endnote takes
+a single argument}\endnote{This endnote follows
+immediately}
 
 The \cmd{printendnotes} should be placed at the end of the document
 which will cause the endnotes to appear thus:
 
+%\theendnotes
 \printendnotes
 %\medskip
 
