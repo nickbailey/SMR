@@ -164,9 +164,26 @@
 \newcommand{\headingfont}{\cabincondensed}
 \newcommand{\titlefont}{\cabin}
 
-
 \ifdefined\@@book@mode
 % Book mode appearance will be defined here when I get a round tuit.
+
+% Arguments are:
+%       Command to format
+%       Layout (http://mirrors.ctan.org/macros/latex/contrib/titlesec/titlesec.pdf p4)
+%       Formatting for label and text
+%       The label
+%       Separation between number and text (vertical with display format)
+%       Code executed before the title body
+%       Code executed after the title body
+\def\partauthor{}
+\titleformat{\part}
+        [display]
+        {\bfseries\Huge\centering\thispagestyle{empty}}
+        {\partname{} \thepart}
+        {3cm}
+        {}
+        [\vspace{1.5cm}\LARGE\partauthor\vspace{10cm}]
+
 \else
 
 \titleclass{\section}[0]{straight}
