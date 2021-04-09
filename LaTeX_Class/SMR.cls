@@ -11,17 +11,20 @@
 
 % The default point size option for SMR is 11.5pt (why??)
 % We'll allow other point sizes through class options.
-\def\@@ptsize{11.5pt}
+%\def\@@ptsize{11.5pt}
 \DeclareOption{10pt}{\def\@@ptsize{10pt}}
 \DeclareOption{11pt}{\def\@@ptsize{11pt}}
 \DeclareOption{12pt}{\def\@@ptsize{12pt}}
+\DeclareOption{a4paper}{\def\@@papersize{a4paper}}
+\DeclareOption{b5paper}{\def\@@papersize{b5paper}}
+\DeclareOption{a5paper}{\def\@@papersize{a5paper}}
+
 % Sometimes we don't want decorations
-\newif\if@decals\@decalstrue
-\DeclareOption{nodecals}{\@decalsfalse}
+\DeclareOption{decals}{\newif\if@decals\@decalstrue}
+\DeclareOption{nodecals}{\newif\if@decals\@decalsfalse}
 % Choose a base package
-\def\@@base@package{article}
+\DeclareOption{article}{\def\@@base@package{article}}
 \DeclareOption{book}{\def\@@base@package{book}\def\@@book@mode{}}
-\PassOptionsToClass{a4paper,twoside}{\@@base@package}
 % For each option in the article, try to load option.smr.
 % If that file doesn't exist, pass the current option to
 % which is the our default base clase.
@@ -29,11 +32,14 @@
 \PassOptionsToClass{\CurrentOption}{\@@base@package}}}
 
 % That's the end of the options section
-\ProcessOptions \relax
+% Run the defaults to set all the necessary variables
+\ExecuteOptions{11pt,a4paper,article,decals}
+\ProcessOptions\relax
 
+\message{SMR: Using (\@@ptsize) font on (\@@papersize) stock}
 
 % Invoke the base class
-\LoadClass{\@@base@package}
+\LoadClass[\@@papersize,twoside,\@@ptsize]{\@@base@package}
 
 
 % font setup WE CAN FIND NICER LOOKING ONE
@@ -41,9 +47,9 @@
 
 % load all required packages
 \RequirePackage[
- a4paper,
+ \@@papersize,
  twoside,
- total={6in, 8in},
+% total={6in, 8in},
  ignoreall = true,
 % top = 5cm,
  top = 3.5cm,
