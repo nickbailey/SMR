@@ -179,10 +179,10 @@
 \titleformat{\part}
         [display]
         {\bfseries\Huge\centering\thispagestyle{empty}}
-        {\partname{} \thepart}
-        {3cm}
+        {\vspace*{-3ex}\partname{} \thepart}
+        {1cm}
         {}
-        [\vspace{1.5cm}\LARGE\partauthor\vspace{10cm}]
+        [\vspace{1.5cm}\LARGE\partauthor]
 
 \else
 
