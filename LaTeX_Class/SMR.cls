@@ -56,8 +56,9 @@
  hmarginratio=1:1]{geometry}
 \RequirePackage{graphicx} 
 \RequirePackage{ifthen}
-%\RequirePackage[T1]{fontenc}
-%\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{kpfonts}
+%\RequirePackage[utf8]{inputenc}  %% Not for xelatex
 \RequirePackage{xcolor}
 % SMR articles have custom titles; books use the defaults.
 \ifdefined\@@book@mode
@@ -189,6 +190,27 @@
         {1cm}
         {}
         [\vspace{1.5cm}\LARGE\partauthor]
+\titleformat{\chapter}
+        [block]
+        {\LARGE\sffamily}
+        {\chaptername{} \thechapter\\}
+        {0cm}
+        {}
+        []
+\titleformat{\section}
+        [hang]
+        {\Large\sffamily}
+        {}
+        {0cm}
+        {}
+        []
+\titleformat{\subsection}
+        [hang]
+        {\normalsize\sffamily}
+        {}
+        {0cm}
+        {}
+        []
 
 \else
 
