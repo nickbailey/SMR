@@ -161,8 +161,7 @@
     \message{LaTeX Warning: No \noexpand\smrauthor. Working around. Use \noexpand\smrauthor
              and \noexpand\smraffiliation to supress this message.}%
     \def\smr@author{}\def\smr@affiliation{\theauthor}\fi
-  \textbf{\smr@author\\
-    \smr@affiliation}%
+  \textbf{\smr@author\ifx\smr@affiliation\empty\else\\\smr@affiliation\fi}%
 }
 \fancyfoot[LE,RO]{\thepage}
 
