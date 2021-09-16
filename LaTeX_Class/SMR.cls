@@ -81,6 +81,7 @@
 \bibliographystyle{SMR}
 \bibpunct[:]{(}{)}{;}{a}{}{,}
 \renewcommand{\refname}{Bibliography}
+\RequirePackage{xr-hyper}
 \RequirePackage[backref=page]{hyperref}
 %\RequirePackage{hypernat}   % Won't be necessary when hyperref is patched offically
 % For simple page references after the bibliography entry:
