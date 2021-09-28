@@ -73,10 +73,11 @@
 \RequirePackage{fancyhdr}
 \RequirePackage{fontspec}
 \RequirePackage{lilyglyphs}
+\RequirePackage{xstring}
 
 %
 % Bibliography and citation styles
-\RequirePackage[round,merge,sort&compress]{natbib}
+\RequirePackage[round,merge,sort&compress,sectionbib]{natbib}
 %\bibliographystyle{plainnat}
 \bibliographystyle{SMR}
 \bibpunct[:]{(}{)}{;}{a}{}{,}
@@ -88,13 +89,25 @@
 %\renewcommand*{\backref}[1]{[#1]}
 % More sophisticated with explanatory text for those not accustomed to back references
 % Thanks: http://tex.stackexchange.com/questions/183702/formatting-back-references-in-bibliography-bibtex
-\renewcommand*{\backref}[1]{}
-\renewcommand*{\backrefalt}[4]{{\footnotesize[%
-    \ifcase #1 Not cited%
-          \or Cited on page~#2%
-          \else Cited on pages #2%
-    \fi%
-    ].}}
+
+\def\plur@lize#1,#2\@nil{%
+  \def\cdr{#2}
+  \ifx\cdr\@empty #1\else s #1\fi}
+\renewcommand*{\backref}[1]{%
+  \footnotesize%
+  \setbox0=\hbox{#1\unskip}%
+  \ifdim\wd0=0pt\empty\else Cited on page\plur@lize#1,\@nil\fi}
+
+% Note that the standard way to implement the above is simply to:
+%
+% \renewcommand*{\backrefalt}[4]{{\footnotesize[%
+%     \ifcase #1 Not cited%
+%           \or Cited on page~#2%
+%           \else Cited on pages #2%
+%     \fi%
+%     ].}}
+%
+% and make \backref {} but this breaks the chapterbib package.
 
 %
 % We'd like to make media references visible only on-screen,
