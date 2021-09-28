@@ -73,7 +73,6 @@
 \RequirePackage{fancyhdr}
 \RequirePackage{fontspec}
 \RequirePackage{lilyglyphs}
-\RequirePackage{xstring}
 
 %
 % Bibliography and citation styles
@@ -97,6 +96,8 @@
   \footnotesize%
   \setbox0=\hbox{#1\unskip}%
   \ifdim\wd0=0pt\empty\else Cited on page\plur@lize#1,\@nil\fi}
+
+% See https://tex.stackexchange.com/q/80436
 
 % Note that the standard way to implement the above is simply to:
 %
