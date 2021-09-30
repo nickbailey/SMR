@@ -22,7 +22,7 @@
 \usepackage{parallel}      % for side-by-side text (e.g. lyrics + translation)
 \usepackage{subcaption}    % for subfigures (including multipage ones)
 \usepackage{filecontents}  % to illustrate citations
-\usepackage{enotez}        % endnotes, not footnotes
+%\usepackage{enotez}        % endnotes, not footnotes
 \usepackage{fnpct}         % multiple notes at a single point
 \usepackage{multicol}
 \usepackage{polyglossia}   % for foreign languages (foreign to the British, that is)
@@ -524,7 +524,6 @@ mean anything in an on-line document; pages are for printing} are discouraged.
 Footnotes can be created with the \cmd{footnote\{\}} command, but we ask that
 you format them as endnotes either by putting
 \begin{verbatim}
- \usepackage{enotez}
  \let\footnote=\endnote
 \end{verbatim}
 in the preamble, or simply using \cmd{endnote\{text\}}\endnote{This is an
@@ -544,10 +543,6 @@ which will cause the endnotes to appear thus:
 %\theendnotes
 \printendnotes
 %\medskip
-
-To make endnotes have links back from the note list to where they
-are used, load the package like this:
-\cmd{usepackage[backref=true]\{enotez\}}
 
 \subsection{Bullet points and lists}
 

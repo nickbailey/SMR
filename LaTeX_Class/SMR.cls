@@ -84,7 +84,7 @@
 \renewcommand{\refname}{Bibliography}
 \RequirePackage{xr-hyper}
 \RequirePackage{enotez}
-\setenotez{backref=true,list-heading={\chapter*{Endnotes}}}
+\setenotez{backref=true}
 
 \RequirePackage[backref=page]{hyperref}
 %\RequirePackage{hypernat}   % Won't be necessary when hyperref is patched offically
@@ -193,7 +193,10 @@
 % Book mode appearance will be defined here when I get a round tuit.
 
 % Make enotez split the notes by chapter
-\setenotez{split=chapter, split-title={\large\chaptername\ <ref>}}
+\setenotez{split=chapter,
+  split-title={\large\chaptername\ <ref>},
+  list-heading={\chapter*{Endnotes}}
+}
 
 % Arguments are:
 %       Command to format
