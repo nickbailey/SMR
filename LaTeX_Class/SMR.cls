@@ -77,11 +77,15 @@
 %
 % Bibliography and citation styles
 \RequirePackage[round,merge,sort&compress,sectionbib]{natbib}
+
 %\bibliographystyle{plainnat}
 \bibliographystyle{SMR}
 \bibpunct[:]{(}{)}{;}{a}{}{,}
 \renewcommand{\refname}{Bibliography}
 \RequirePackage{xr-hyper}
+\RequirePackage{enotez}
+\setenotez{backref=true,list-heading={\chapter*{Endnotes}}}
+
 \RequirePackage[backref=page]{hyperref}
 %\RequirePackage{hypernat}   % Won't be necessary when hyperref is patched offically
 % For simple page references after the bibliography entry:
@@ -187,6 +191,9 @@
 
 \ifdefined\@@book@mode
 % Book mode appearance will be defined here when I get a round tuit.
+
+% Make enotez split the notes by chapter
+\setenotez{split=chapter, split-title={\large\chaptername\ <ref>}}
 
 % Arguments are:
 %       Command to format
