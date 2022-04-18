@@ -57,7 +57,7 @@
 \RequirePackage{graphicx} 
 \RequirePackage{ifthen}
 \RequirePackage[T1]{fontenc}
-\RequirePackage[nomath,noamsmath]{kpfonts}
+\RequirePackage[nomath]{kpfonts}
 %\RequirePackage[utf8]{inputenc}  %% Not for xelatex
 \RequirePackage{xcolor}
 % SMR articles have custom titles; books use the defaults.
