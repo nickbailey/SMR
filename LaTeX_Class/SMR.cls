@@ -216,14 +216,14 @@
         [\vspace{1.5cm}\LARGE\partauthor]
 \titleformat{\chapter}
         [block]
-        {\LARGE\sffamily}
-        {\chaptername{} \thechapter\\}
+        {\Large\sffamily}
+        {\chaptername{}~\thechapter\\}
         {0cm}
         {}
-        []
+        [\vspace{-2\baselineskip}]
 \titleformat{\section}
         [hang]
-        {\Large\sffamily}
+        {\large\sffamily}
         {}
         {0cm}
         {}
