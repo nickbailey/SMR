@@ -209,7 +209,7 @@
 \def\partauthor{}
 \titleformat{\part}
         [display]
-        {\bfseries\Huge\centering\thispagestyle{empty}}
+        {\bfseries\Huge\sffamily\centering\thispagestyle{empty}}
         {\vspace*{-3ex}\partname{} \thepart}
         {1cm}
         {}
