@@ -18,6 +18,7 @@
 \DeclareOption{a4paper}{\def\@@papersize{a4paper}}
 \DeclareOption{b5paper}{\def\@@papersize{b5paper}}
 \DeclareOption{a5paper}{\def\@@papersize{a5paper}}
+\DeclareOption{letterpaper}{\def\@@papersize{letterpaper}}
 
 % Sometimes we don't want decorations
 \DeclareOption{decals}{\newif\if@decals\@decalstrue}
